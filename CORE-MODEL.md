@@ -333,10 +333,13 @@ ADE-Core
 ├── Relationship
 └── Intent
      │
-     ├── ADE-HTF
-     ├── ADE-USLF
-     ├── ADE-LF
-     └── ADE-ID
+     └── provides the foundational concepts
+         used by specialized ADE frameworks
+              │
+              ├── ADE-HTF
+              ├── ADE-USLF
+              ├── ADE-LF
+              └── ADE-ID
 ```
 
 ADE-ID is a proposed framework for distributed identity interoperability.
