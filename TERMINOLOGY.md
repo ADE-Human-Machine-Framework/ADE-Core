@@ -96,11 +96,11 @@ An Event is a specialized Entity representing an occurrence, happening, or defin
 
 **Examples**
 
-* Repair
+* Repair event
 * Meeting
-* Transaction
+* Transaction event
 * Earthquake
-* Equipment inspection
+* Equipment inspection event
 
 **Notes**
 
@@ -215,6 +215,7 @@ Location may be represented at different levels of precision and through differe
 **Definition**
 
 A Relationship represents a meaningful connection between two or more Entities.
+ADE-Core relationships are directional and may have an inverse perspective.
 
 **Examples**
 
