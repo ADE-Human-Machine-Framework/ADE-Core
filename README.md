@@ -16,6 +16,42 @@ ADE is designed as a framework for developing interoperable standards rather tha
 
 It provides the common vocabulary, conceptual model, architectural principles, and foundational definitions needed for the development of additional ADE standards.
 
+## Core Documentation
+
+The ADE-Core foundation is organized into the following documents:
+
+### [CHARTER.md](CHARTER.md)
+
+Defines the purpose, vision, mission, scope, principles, and intended development of the ADE Human-Machine Framework.
+
+### [ARCHITECTURE.md](ARCHITECTURE.md)
+
+Describes the architectural structure of ADE-Core and its relationship to specialized ADE frameworks.
+
+### [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md)
+
+Defines the principles that guide the design and evolution of ADE standards.
+
+### [CORE-MODEL.md](CORE-MODEL.md)
+
+Defines the foundational ADE concepts and their relationships.
+
+### [TERMINOLOGY.md](TERMINOLOGY.md)
+
+Defines the authoritative foundational vocabulary used throughout ADE.
+
+### [RELATIONSHIPS.md](RELATIONSHIPS.md)
+
+Describes the foundational semantic relationships between ADE concepts.
+
+### Suggested Reading Order
+
+For readers new to ADE-Core, the recommended sequence is:
+
+**CHARTER → ARCHITECTURE → DESIGN PRINCIPLES → CORE MODEL → TERMINOLOGY → RELATIONSHIPS**
+
+The README provides an overview and entry point; the documents above contain the substantive foundation of ADE-Core.
+
 ## Core Purpose
 
 ADE-Core is intended to establish a consistent foundation for:
@@ -78,7 +114,7 @@ This process is intended to encourage transparency, technical review, community 
 
 ## Repository Purpose
 
-This repository contains the foundational material for ADE, including:
+This repository contains the foundational material for **ADE-Core**, including:
 
 * Core architectural principles
 * Foundational definitions
