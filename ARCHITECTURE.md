@@ -166,8 +166,6 @@ The ADE architecture is designed to allow new frameworks to be added without req
 Future frameworks may address additional areas such as:
 
 * Identity
-* Events
-* Objects
 * Organizations
 * Transactions
 * Communication
@@ -248,6 +246,3 @@ The governance model will be further defined as the ADE community develops.
 This document represents the initial architectural description of the ADE Human-Machine Framework.
 
 It is a **Foundational Draft** and is expected to evolve as the framework undergoes technical development and community review.
-
-**Version:** 0.1.0
-**Status:** Foundational Draft
