@@ -10,7 +10,7 @@
 
 ## 1. Purpose
 
-This document defines how relationships between ADE Entities are represented and interpreted within the ADE Human-Machine Framework.
+This document defines how relationships between ADE concepts are represented and interpreted within the ADE Human-Machine Framework.
 
 Relationships provide the structural connections through which Entities, Objects, Events, Actions, States, Attributes, Time, Location, and Intent can be understood in context.
 
@@ -39,7 +39,7 @@ Domain-specific relationships may be defined by specialized ADE frameworks while
 
 ## 3. Relationship Principle
 
-A Relationship represents a meaningful connection between two or more Entities.
+A Relationship represents a meaningful semantic connection between two or more ADE concepts.
 
 The relationship itself carries semantic meaning.
 
@@ -71,9 +71,9 @@ ADE-Core defines Relationships as **directional**.
 
 A directional Relationship identifies:
 
-* A source Entity
+* A source concept
 * A relationship meaning
-* A target Entity
+* A target concept
 
 Conceptually:
 
@@ -579,9 +579,9 @@ This diagram is conceptual and does not constitute a complete formal ontology.
 
 ## 18. Foundational Principle
 
-> **Relationships carry meaning between Entities.**
+> **Relationships carry meaning between ADE concepts.**
 
-ADE-Core uses directional relationships to provide a consistent semantic structure through which humans and machines can interpret how Entities are connected.
+ADE-Core uses directional relationships to provide a consistent semantic structure through which humans and machines can interpret how ADE concepts are connected.
 
 The underlying semantic relationship should remain independent of the natural language or system-specific representation used to express it.
 
