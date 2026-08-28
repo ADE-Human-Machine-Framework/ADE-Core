@@ -1,14 +1,13 @@
-# ADE Core Model
+# ADE Human-Machine Framework
 
-**ADE Human-Machine Framework**
+## ADE-Core Core Model
 
-**Document ID:** ADE-CORE
-**Document Type:** Foundational Architecture
 **Status:** Foundational Draft
+**Repository:** ADE-Core
 **Version:** 0.3.0
-**Maintained By:** ADE Human-Machine Framework
 
 ---
+
 
 ## 1. Purpose
 
