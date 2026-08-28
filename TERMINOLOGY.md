@@ -64,7 +64,7 @@ An Entity is something that can be identified, represented, referenced, or disti
 
 **Notes**
 
-Entity is the foundational concept upon which many other ADE concepts are built.
+Entity is a foundational ADE concept. Other ADE concepts may have defined relationships with Entities without necessarily being specialized types of Entity.
 
 ---
 
@@ -214,7 +214,8 @@ Location may be represented at different levels of precision and through differe
 
 **Definition**
 
-A Relationship represents a meaningful connection between two or more Entities.
+A Relationship represents a meaningful semantic connection between two or more ADE concepts.
+
 ADE-Core relationships are directional and may have an inverse perspective.
 
 **Examples**
@@ -227,7 +228,7 @@ ADE-Core relationships are directional and may have an inverse perspective.
 
 **Notes**
 
-Relationships provide the connective structure through which Entities can be understood in relation to one another.
+Relationships provide the connective structure through which ADE concepts can be understood in relation to one another.
 
 ---
 
