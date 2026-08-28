@@ -98,14 +98,16 @@ An Entity may have:
 
 ### Specialized Entities
 
-Some entities have more specific semantic roles.
+Some ADE concepts have more specific Entity roles.
 
-Examples include:
+Within ADE-Core:
 
-* **Object** — a physical or digital thing
-* **Event** — an occurrence or happening
+* **Object** — a specialized Entity representing a physical or digital thing.
+* **Event** — a specialized Entity representing an occurrence or happening.
 
-Additional Entity types may be defined by future ADE frameworks.
+The remaining ADE-Core concepts are not automatically treated as specialized Entity types. They provide additional semantic structures, properties, context, or relationships that may apply to Entities and to one another.
+
+Additional specialized Entity types may be defined by future ADE frameworks.
 
 ---
 
@@ -338,7 +340,7 @@ A Location may be known, approximate, unknown, or otherwise qualified without fo
 
 ## 4.9 Relationship
 
-A **Relationship** defines a meaningful connection between Entities.
+A **Relationship** defines a meaningful semantic connection between ADE concepts.
 
 Examples:
 
@@ -539,32 +541,50 @@ This example is conceptual and does not constitute a complete formal representat
 A simplified representation of the ADE Core Model is:
 
 ```text
-                         ENTITY
-                            │
-             ┌──────────────┼──────────────┐
-             │              │              │
-          OBJECT          EVENT          OTHER
-                            │
-                   ┌────────┼────────┐
-                   │        │        │
-                ACTION     TIME    LOCATION
-                   │
-                   ▼
-                 STATE
-                   │
-              STATE CHANGE
+                    ADE CORE CONCEPTS
 
-ENTITY
-  ├── ATTRIBUTE
-  ├── STATE
-  ├── RELATIONSHIP
-  ├── LOCATION
-  └── INTENT
+             ┌──────────── ENTITY ────────────┐
+             │                                  │
+             ├── OBJECT                         │
+             │                                  │
+             └── EVENT                          │
+                                                │
+       ┌───────────────┬────────────────────────┘
+       │               │
+       ▼               ▼
+    ACTION           STATE
+       │               │
+       │          STATE CHANGE
+       │
+       ├────────── affects ──────────> ENTITY
+       │
+       └────────── performed by ────> ENTITY
+
+
+    ENTITY
+       ├── ATTRIBUTE
+       ├── LOCATION
+       ├── RELATIONSHIP
+       └── INTENT
+
+
+    EVENT
+       ├── ACTION
+       ├── TIME
+       ├── LOCATION
+       ├── STATE
+       └── INTENT
+
+
+    TIME
+       ├── TIME POINT
+       ├── DURATION
+       └── TIME INTERVAL
 ```
 
-This diagram is conceptual rather than a complete formal ontology.
+This diagram is conceptual and does not constitute a complete formal ontology.
 
----
+```
 
 # 11. Framework Extensions
 
