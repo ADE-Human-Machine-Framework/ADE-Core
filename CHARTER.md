@@ -4,7 +4,7 @@
 
 **Status:** Foundational Draft
 **Repository:** ADE-Core
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ---
 
@@ -22,7 +22,7 @@ ADE is intended to function as a standards architecture rather than as a proprie
 
 The vision of ADE is to establish a common architectural foundation through which information can be represented and communicated in ways that are understandable across human, machine, organizational, technological, and temporal contexts.
 
-ADE seeks to reduce ambiguity and fragmentation by establishing common structures for representing meaning, relationships, time, location, events, states, and other fundamental aspects of information.
+ADE seeks to reduce ambiguity and fragmentation by establishing common structures for representing meaning, relationships, time, location, events, states, identity, authority, authorization, and other fundamental aspects of information.
 
 ---
 
@@ -47,6 +47,11 @@ The initial scope includes, but is not limited to:
 * Events and actions
 * States and attributes
 * Relationships between entities
+* Identity and identification
+* Authentication and verification
+* Authority, capability, and authorization
+* Information source and provenance
+* Uncertainty, confidence, and assertions
 * Information interoperability
 * Human-machine communication
 * Standards development and conformance
@@ -91,6 +96,12 @@ ADE-Core should establish architectural concepts without requiring dependence on
 
 ADE is intended to evolve through documented proposals, technical examination, community discussion, review, and publication.
 
+### 5.9 Context and Proportionality
+
+ADE should support the representation of information according to the context and purpose for which it is required.
+
+Information should not need to be unnecessarily duplicated, exposed, or combined when a reference or limited representation is sufficient to establish the required meaning.
+
 ---
 
 ## 6. ADE-Core
@@ -124,10 +135,21 @@ ADE-Core establishes a foundational conceptual model consisting of:
 8. **Location**
 9. **Relationship**
 10. **Intent**
+11. **Identity**
+12. **Authentication**
+13. **Authority**
+14. **Capability**
+15. **Authorization**
+16. **Source**
+17. **Assertion**
+18. **Confidence**
+19. **Provenance**
 
-These concepts provide a common vocabulary for describing information and relationships within the ADE architecture.
+These concepts provide a common vocabulary for describing information, identity, authority, context, and relationships within the ADE architecture.
 
 The definitions and relationships of these concepts will be maintained as formal ADE-Core specifications.
+
+Not every Core concept represents a specialized type of Entity. Some provide semantic context, information about information, identity, authority, or the conditions under which information or actions may be interpreted.
 
 ---
 
@@ -217,7 +239,7 @@ This document represents the **foundational draft Charter of ADE-Core**.
 
 It is intended to establish the initial architectural direction of the ADE Human-Machine Framework and may be revised through the ADE standards-development process.
 
-**Version:** 0.1.0
+**Version:** 0.2.0
 **Status:** Foundational Draft
 
 ---
