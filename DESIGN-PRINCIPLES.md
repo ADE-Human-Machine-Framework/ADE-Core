@@ -4,7 +4,7 @@
 
 **Status:** Foundational Draft
 **Repository:** ADE-Core
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ---
 
@@ -110,6 +110,12 @@ Intent ≠ Action
 Event ≠ Action
 
 Event State ≠ Entity State
+
+Identity ≠ Authentication
+
+Authentication ≠ Authorization
+
+Authority ≠ Capability
 ```
 
 Explicit distinctions reduce ambiguity and improve machine interpretation.
@@ -340,13 +346,126 @@ Relevant context may include:
 * Source
 * Relationship
 * Intent
+* Identity
+* Authority
+* Authorization
 * Other applicable conditions
 
 ADE should provide mechanisms for representing contextual information without unnecessarily adding every possible contextual property to the Core.
 
 ---
 
-## 16. Separation of Core and Extensions
+## 16. Identity Is Distinct From Authentication
+
+An Identity provides a reference or representation associated with an Entity.
+
+Identity should not automatically be interpreted as proof that an Entity or actor has been authenticated.
+
+Conceptually:
+
+```text
+Entity
+   │
+   └── has identity ──> Identity
+                          │
+                          └── authenticated through ──> Authentication
+```
+
+Authentication establishes that an actor can demonstrate control of, or association with, an Identity within a defined context.
+
+Authentication does not by itself establish permission to perform an Action.
+
+This distinction allows ADE to represent identity without requiring every use of identity to expose unnecessary personal or identifying information.
+
+---
+
+## 17. Authorization Is Distinct From Identity and Authentication
+
+Authorization determines whether an Entity or actor is permitted to perform an Action within a defined context.
+
+Conceptually:
+
+```text
+Identity
+    │
+Authentication
+    │
+Authority
+    │
+Capability
+    │
+Authorization
+    │
+    ▼
+Action
+```
+
+Authorization may depend upon:
+
+* Identity
+* Authentication
+* Authority
+* Capability
+* Time
+* Location
+* Relationship
+* Intent
+* State
+* Applicable rules
+* Emergency conditions
+
+Authentication answers a question about demonstrated identity or control.
+
+Authorization answers a question about permitted action.
+
+These must remain semantically distinct.
+
+---
+
+## 18. Authority and Capability
+
+An Entity may possess or be associated with Authority within a defined context.
+
+Authority may provide one or more Capabilities.
+
+For example:
+
+```text
+Human
+   │
+   └── has authority ──> Authority Level
+                              │
+                              └── provides ──> Capability
+```
+
+Authority and Capability may be:
+
+* Contextual
+* Time-limited
+* Delegated
+* Restricted
+* Hierarchical
+* Subject to additional conditions
+
+ADE does not require a single universal authority numbering system.
+
+Specific authority levels, roles, or emergency rules may be defined by applicable ADE frameworks or profiles.
+
+This allows systems to distinguish between:
+
+```text
+May perform
+May approve
+May pause
+May cancel
+May override
+```
+
+without assuming that every authorized actor has the same level of control.
+
+---
+
+## 19. Separation of Core and Extensions
 
 ADE-Core establishes foundational concepts and principles.
 
@@ -364,7 +483,7 @@ A specialized framework should not redefine the fundamental meaning of an establ
 
 ---
 
-## 17. Human Readability
+## 20. Human Readability
 
 ADE should remain understandable to humans.
 
@@ -376,7 +495,7 @@ A human should be able to understand the semantic intent of a representation eve
 
 ---
 
-## 18. Machine Interpretability
+## 21. Machine Interpretability
 
 ADE representations should provide sufficient semantic structure for machines to interpret information consistently.
 
@@ -391,7 +510,7 @@ ADE should allow different systems to reach a consistent interpretation of the s
 
 ---
 
-## 19. Technology Independence
+## 22. Technology Independence
 
 ADE is a semantic framework rather than a requirement for a particular programming language, database, application, communication protocol, or hardware platform.
 
@@ -401,7 +520,7 @@ This allows ADE to evolve as technology changes.
 
 ---
 
-## 20. Implementation Independence
+## 23. Implementation Independence
 
 The ADE semantic model should remain distinct from any individual implementation.
 
@@ -418,7 +537,7 @@ Interoperability depends on shared semantic meaning rather than identical implem
 
 ---
 
-## 21. Extensibility Without Fragmentation
+## 24. Extensibility Without Fragmentation
 
 ADE must be capable of evolving without creating incompatible interpretations.
 
@@ -434,25 +553,32 @@ Growth should occur through structured extension rather than uncontrolled expans
 
 ---
 
-## 22. Transparency of Uncertainty
+## 25. Transparency of Uncertainty
 
 ADE should preserve meaningful uncertainty.
 
 Information may have different levels of certainty or confidence.
 
-Future ADE semantic layers may address concepts such as:
+Source, Assertion, Evidence, Confidence, and Provenance may provide additional context about information without automatically becoming the information itself.
 
-* Evidence
-* Source
-* Confidence
-* Certainty
-* Provenance
+For example:
 
-These should complement the Core rather than obscure the distinction between what is known and what is uncertain.
+```text
+Source
+   │
+   └── provides ──> Assertion
+                       │
+                       ├── Confidence
+                       └── Provenance
+```
+
+An Assertion about an Event or Relationship must remain distinguishable from the underlying Event or Relationship.
+
+A high confidence value does not automatically transform an Assertion into an established fact.
 
 ---
 
-## 23. Semantic Consistency
+## 26. Semantic Consistency
 
 A foundational ADE concept should have a consistent meaning across the framework.
 
@@ -462,7 +588,7 @@ Consistency allows independently developed systems and frameworks to communicate
 
 ---
 
-## 24. Separation of Meaning and Language
+## 27. Separation of Meaning and Language
 
 ADE does not attempt to replace natural languages.
 
@@ -484,7 +610,7 @@ This principle supports the broader goal of human-to-machine understanding witho
 
 ---
 
-## 25. Separation of Meaning and System
+## 28. Separation of Meaning and System
 
 Different systems may represent the same semantic information differently.
 
@@ -510,7 +636,7 @@ They require a shared understanding of the underlying ADE semantics.
 
 ---
 
-## 26. Evolution Through Evidence and Testing
+## 29. Evolution Through Evidence and Testing
 
 ADE concepts should be tested against real-world scenarios before becoming foundational standards.
 
@@ -527,7 +653,7 @@ A concept that appears simple in isolation should be tested in realistic situati
 
 ---
 
-## 27. Avoid Premature Complexity
+## 30. Avoid Premature Complexity
 
 ADE should not introduce complexity merely because a concept could theoretically be useful.
 
@@ -539,7 +665,7 @@ This protects the Core from uncontrolled growth.
 
 ---
 
-## 28. Foundational Principle
+## 31. Foundational Principle
 
 The ADE Human-Machine Framework is based on the following principle:
 
@@ -549,7 +675,7 @@ ADE is therefore concerned first with **meaning**, then with **representation**.
 
 ---
 
-## 29. Future Development
+## 32. Future Development
 
 Future ADE specifications may define additional principles as the framework is tested and developed.
 
