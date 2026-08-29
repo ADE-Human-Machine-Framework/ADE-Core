@@ -14,7 +14,9 @@ ADE is designed as a framework for developing interoperable standards rather tha
 
 **ADE-Core** establishes the foundational concepts and architectural principles upon which the ADE framework and its specialized standards are built.
 
-It provides the common vocabulary, conceptual model, architectural principles, and foundational definitions needed for the development of additional ADE standards.
+It provides the common vocabulary, conceptual model, architectural principles, relationships, and foundational definitions needed for the development of additional ADE standards.
+
+ADE-Core is intended to remain relatively small and stable while allowing specialized frameworks and higher-level semantic layers to build upon it.
 
 ## Core Documentation
 
@@ -44,7 +46,7 @@ Defines the authoritative foundational vocabulary used throughout ADE.
 
 Describes the foundational semantic relationships between ADE concepts.
 
-### [CONTRIBUTING.md](CONTRIBUTING.md)
+### [CONTRIBUTION.md](CONTRIBUTION.md)
 
 Describes how individuals, organizations, developers, researchers, and other participants can contribute to the development of ADE standards.
 
@@ -52,7 +54,7 @@ Describes how individuals, organizations, developers, researchers, and other par
 
 For readers new to ADE-Core, the recommended sequence is:
 
-**CHARTER → ARCHITECTURE → DESIGN PRINCIPLES → CORE MODEL → TERMINOLOGY → RELATIONSHIPS → CONTRIBUTING**
+**CHARTER → ARCHITECTURE → DESIGN PRINCIPLES → CORE MODEL → TERMINOLOGY → RELATIONSHIPS → CONTRIBUTION**
 
 The README provides an overview and entry point; the documents above contain the substantive foundation of ADE-Core, followed by guidance for participating in its development.
 
@@ -124,6 +126,7 @@ This repository contains the foundational material for **ADE-Core**, including:
 * Foundational definitions
 * Core conceptual model
 * Terminology
+* Relationships
 * Architectural specifications
 * Foundational standards
 * Supporting documentation
