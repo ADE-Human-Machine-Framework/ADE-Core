@@ -4,7 +4,7 @@
 
 **Status:** Foundational Draft
 **Repository:** ADE-Core
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ---
 
@@ -33,8 +33,9 @@ The recommended reading order is:
 5. `CORE-MODEL.md`
 6. `TERMINOLOGY.md`
 7. `RELATIONSHIPS.md`
+8. `CONTRIBUTION.md`
 
-These documents establish the current foundational architecture, concepts, principles, terminology, and relationships of ADE-Core.
+These documents establish the current foundational architecture, concepts, principles, terminology, relationships, and standards-development approach of ADE-Core.
 
 ---
 
@@ -57,6 +58,9 @@ Contributions may include:
 * Identification of ambiguity or contradictions
 * Proposed extensions
 * Testing and validation of ADE concepts
+* Identity and authorization scenarios
+* Information-source and provenance scenarios
+* Privacy and information-minimization considerations
 
 A contribution does not need to be a complete solution.
 
@@ -82,6 +86,7 @@ The objective is to develop standards that are:
 * Extensible
 * Technology independent
 * Stable over time
+* Appropriate to their context
 
 ---
 
@@ -128,6 +133,8 @@ Participants are encouraged to explain:
 * Whether existing concepts could already address the requirement
 * What new concepts or relationships may be required
 * What potential problems or limitations exist
+* What information is actually required to accomplish the intended purpose
+* Whether information can be referenced rather than unnecessarily duplicated or exposed
 
 Early discussion is intended to allow ideas to improve before formal standardization.
 
@@ -151,6 +158,12 @@ Changing machine state
 Reported events
 Conflicting information
 Incomplete information
+Identity verification
+Authorization of an Action
+Different authority levels
+Emergency intervention
+Information distributed across independent sources
+Information available through reference rather than duplication
 ```
 
 Scenarios can reveal:
@@ -161,6 +174,9 @@ Scenarios can reveal:
 * Unnecessary concepts
 * Unexpected relationships
 * Implementation difficulties
+* Privacy or information-exposure concerns
+* Authorization conflicts
+* Inappropriate assumptions about identity or source
 
 A concept that works in a simple example may require modification when tested against more complex situations.
 
@@ -181,6 +197,8 @@ Useful challenges may identify:
 * Edge cases
 * Interoperability problems
 * Contradictions with other ADE standards
+* Excessive information requirements
+* Inappropriate assumptions about identity, authority, or authorization
 
 The purpose of challenge is to strengthen the standard.
 
@@ -195,6 +213,8 @@ Before proposing a new Core concept, contributors should consider whether the re
 New Core concepts should have a demonstrated foundational purpose that applies across multiple domains.
 
 Domain-specific requirements should normally be developed as extensions or specialized frameworks.
+
+The existence of a useful concept does not by itself require that the concept become part of ADE-Core.
 
 ---
 
@@ -257,9 +277,32 @@ An implementation should not automatically determine the standard.
 
 Instead, implementation experience should be used to identify practical requirements, limitations, and interoperability considerations.
 
+Implementations may also demonstrate how ADE concepts can operate across independently controlled information sources without requiring all underlying information to be copied into a single system.
+
 ---
 
-## 13. Intellectual Property and Licensing
+## 13. Information Minimization and Distributed Sources
+
+ADE recognizes that information required to establish a particular meaning may exist across independent systems, organizations, jurisdictions, or other information sources.
+
+Contributors should consider whether a requirement can be satisfied through:
+
+* A reference to an authoritative source
+* Verification of a specific claim
+* Retrieval of only the information required for the current purpose
+* Contextual authorization
+* Limited disclosure
+* Distributed information relationships
+
+ADE should not require information to be unnecessarily duplicated or combined merely because multiple pieces of information contribute to a single interpretation.
+
+The architectural objective is to support interoperability while allowing information sources to retain appropriate control over the information they maintain.
+
+Specific mechanisms for distributed information, verification, privacy, and access control may be defined by applicable ADE standards.
+
+---
+
+## 14. Intellectual Property and Licensing
 
 The intellectual-property and licensing framework for ADE is currently under development.
 
@@ -269,7 +312,7 @@ Specific contribution and licensing terms will be established through the approp
 
 ---
 
-## 14. Respectful Collaboration
+## 15. Respectful Collaboration
 
 ADE development should encourage constructive technical discussion.
 
@@ -286,7 +329,7 @@ Disagreement is expected in standards development and can be productive when con
 
 ---
 
-## 15. Governance
+## 16. Governance
 
 ADE governance is currently developing.
 
@@ -306,7 +349,7 @@ Until formal governance procedures are established, contributions should be eval
 
 ---
 
-## 16. Getting Started
+## 17. Getting Started
 
 A participant does not need to be a developer to contribute.
 
@@ -320,7 +363,7 @@ Technical expertise can be applied as a proposal develops.
 
 ---
 
-## 17. Current Development Stage
+## 18. Current Development Stage
 
 ADE-Core is currently a **Foundational Draft**.
 
@@ -330,7 +373,7 @@ The Core should therefore be considered open to examination and improvement.
 
 ---
 
-## 18. Foundational Principle
+## 19. Foundational Principle
 
 > **ADE standards should be developed through open examination, practical testing, constructive challenge, and documented review.**
 
