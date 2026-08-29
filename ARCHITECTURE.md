@@ -70,6 +70,19 @@ These include:
 * Standards-development principles
 * Conformance foundations
 
+Examples of foundational concepts that may be defined by ADE-Core include:
+
+* Entity
+* Identity
+* Relationship
+* Action
+* Event
+* State
+* Source
+* Provenance
+* Authority
+* Authorization
+
 ADE-Core should remain as stable as reasonably possible because changes to the core may affect multiple dependent frameworks.
 
 ---
@@ -165,11 +178,11 @@ The ADE architecture is designed to allow new frameworks to be added without req
 
 Future frameworks may address additional areas such as:
 
-* Identity
 * Organizations
 * Transactions
 * Communication
 * Knowledge representation
+* Industry-specific profiles
 * Other domains identified through community requirements
 
 New frameworks should demonstrate compatibility with ADE-Core.
