@@ -4,7 +4,7 @@
 
 **Status:** Foundational Draft
 **Repository:** ADE-Core
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ---
 
@@ -12,7 +12,7 @@
 
 This document defines how relationships between ADE concepts are represented and interpreted within the ADE Human-Machine Framework.
 
-Relationships provide the structural connections through which Entities, Objects, Events, Actions, States, Attributes, Time, Location, and Intent can be understood in context.
+Relationships provide the structural connections through which Entities, Objects, Events, Actions, States, Attributes, Identity, Source, Time, Location, Authority, Authorization, and Intent can be understood in context.
 
 The purpose of this document is to establish a consistent foundation for representing relationships across human, machine, and system environments.
 
@@ -31,6 +31,7 @@ This document establishes:
 * Core relationship patterns
 * Context associated with relationships
 * Relationship lifecycle and validity
+* Relationships involving identity, source, authority, and authorization
 * Extensibility for specialized ADE frameworks
 
 Domain-specific relationships may be defined by specialized ADE frameworks while remaining compatible with ADE-Core.
@@ -123,7 +124,7 @@ This reduces the possibility of contradictory relationship information.
 
 ---
 
-## 6. Core Relationship Patterns
+# 6. Core Relationship Patterns
 
 ADE-Core establishes several fundamental relationship patterns.
 
@@ -155,7 +156,21 @@ Organization ── operates ──> Machine
 
 ---
 
-### 6.3 Entity to Event
+### 6.3 Entity to Identity
+
+An Entity may be associated with one or more Identities.
+
+```text
+Person
+   │
+   └── has identity ──> Identity
+```
+
+An Identity provides a reference to an Entity but does not by itself establish that the Entity has been authenticated or authorized.
+
+---
+
+### 6.4 Entity to Event
 
 An Entity may participate in an Event.
 
@@ -171,7 +186,7 @@ Participation may be further qualified by specialized frameworks.
 
 ---
 
-### 6.4 Entity to Action
+### 6.5 Entity to Action
 
 An Entity may perform, initiate, authorize, receive, or otherwise participate in an Action.
 
@@ -183,9 +198,11 @@ Technician ── performs ──> Repair Action
 Manager ── authorizes ──> Repair Action
 ```
 
+Authorization should remain distinguishable from the underlying relationship between an Entity and an Action.
+
 ---
 
-### 6.5 Action to Entity
+### 6.6 Action to Entity
 
 An Action may affect, modify, create, or otherwise act upon an Entity.
 
@@ -199,7 +216,7 @@ Update Action ── modifies ──> Document
 
 ---
 
-### 6.6 Event to Action
+### 6.7 Event to Action
 
 An Event may contain or reference one or more Actions.
 
@@ -215,7 +232,7 @@ Some Events may occur without a performed Action.
 
 ---
 
-### 6.7 Entity to State
+### 6.8 Entity to State
 
 An Entity may have a State.
 
@@ -227,7 +244,7 @@ State is understood in relation to Time and may change as a result of Events or 
 
 ---
 
-### 6.8 Entity to Attribute
+### 6.9 Entity to Attribute
 
 An Entity may have Attributes.
 
@@ -239,7 +256,7 @@ The Attribute value may change over Time without changing the identity of the En
 
 ---
 
-### 6.9 Event to Time
+### 6.10 Event to Time
 
 An Event may have temporal context.
 
@@ -258,7 +275,7 @@ An Event may also have:
 
 ---
 
-### 6.10 Event to Location
+### 6.11 Event to Location
 
 An Event may have spatial context.
 
@@ -270,7 +287,7 @@ Repair Event
 
 ---
 
-### 6.11 Entity to Location
+### 6.12 Entity to Location
 
 An Entity may have a Location at a particular point or interval in Time.
 
@@ -282,7 +299,7 @@ The Location of an Entity may change over Time.
 
 ---
 
-### 6.12 Entity, Event, or Action to Intent
+### 6.13 Entity, Event, or Action to Intent
 
 An Entity, Event, or Action may be associated with an Intent.
 
@@ -296,7 +313,139 @@ Intent does not guarantee that an Action will occur or that its intended result 
 
 ---
 
-## 7. Relationships and State
+### 6.14 Source to Assertion
+
+A Source may provide or originate an Assertion.
+
+```text
+Maintenance System
+       │
+       └── provides ──> Assertion
+```
+
+The Source and Assertion remain distinct concepts.
+
+A Source may provide multiple Assertions about the same or different subjects.
+
+---
+
+### 6.15 Assertion to Subject
+
+An Assertion may describe or refer to an Entity, Event, Action, State, Attribute, Relationship, or other ADE concept.
+
+```text
+Assertion
+    │
+    └── refers to ──> Machine
+```
+
+The existence of an Assertion does not by itself establish that the information asserted is true.
+
+---
+
+### 6.16 Assertion to Confidence and Provenance
+
+An Assertion may have associated Confidence and Provenance.
+
+```text
+Assertion
+    ├── has confidence ──> High
+    │
+    └── has provenance ──> Source / History
+```
+
+Confidence represents a qualified assessment associated with the information.
+
+Provenance describes its origin or history.
+
+Neither concept independently establishes truth.
+
+---
+
+### 6.17 Identity to Authentication
+
+An Identity may be associated with an Authentication process.
+
+```text
+Identity
+    │
+    └── authenticated through ──> Authentication
+```
+
+Authentication establishes that an actor can demonstrate control of, or association with, an Identity.
+
+Authentication does not itself establish Authorization.
+
+---
+
+### 6.18 Entity to Authority
+
+An Entity may possess or be associated with Authority within a defined context.
+
+```text
+Human
+   │
+   └── has authority ──> Authority Level 3
+```
+
+Authority may be established through a Relationship, organizational role, legal or regulatory designation, delegation, or other recognized mechanism.
+
+Authority may be contextual, time-limited, or otherwise qualified.
+
+---
+
+### 6.19 Authority to Capability
+
+An Authority may provide one or more Capabilities.
+
+```text
+Authority Level 3
+       │
+       └── provides ──> Capability: Pause Machine
+```
+
+A Capability represents an Action or class of Actions that an Authority permits an Entity or actor to perform within a defined context.
+
+---
+
+### 6.20 Authorization to Action
+
+Authorization determines whether an Entity or actor is permitted to perform a specific Action within a defined context.
+
+```text
+Identity
+    │
+Authentication
+    │
+Authority
+    │
+Capability
+    │
+Authorization
+    │
+    ▼
+Action
+```
+
+Authorization may depend upon:
+
+* Identity
+* Authentication
+* Authority
+* Capability
+* Time
+* Location
+* Relationship
+* Intent
+* State
+* Applicable rules
+* Emergency conditions
+
+Authorization should remain distinct from Authentication.
+
+---
+
+# 7. Relationships and State
 
 Relationships may describe State changes.
 
@@ -320,7 +469,7 @@ A Relationship describing an Action affecting an Entity does not itself become t
 
 ---
 
-## 8. Relationships and Time
+# 8. Relationships and Time
 
 Relationships may have temporal context.
 
@@ -346,7 +495,7 @@ The same Entities may have different relationships at different times.
 
 ---
 
-## 9. Relationships and Location
+# 9. Relationships and Location
 
 Relationships may also have spatial context.
 
@@ -368,7 +517,7 @@ ADE should not require false precision.
 
 ---
 
-## 10. Relationship Attributes
+# 10. Relationship Attributes
 
 A Relationship may require additional descriptive information.
 
@@ -391,7 +540,7 @@ These properties describe the relationship and should not necessarily be interpr
 
 ---
 
-## 11. Relationship State and Validity
+# 11. Relationship State and Validity
 
 A Relationship may have a lifecycle or validity condition.
 
@@ -411,7 +560,7 @@ Historical relationships may therefore be retained as part of an Entity's histor
 
 ---
 
-## 12. Unknown and Incomplete Relationships
+# 12. Unknown and Incomplete Relationships
 
 ADE must support relationships where some information is unknown or incomplete.
 
@@ -437,9 +586,11 @@ Machine ── repaired by ──> None
 
 Unknown information must not be interpreted as false, zero, nonexistent, or not applicable.
 
+The same principle applies to Identity, Source, Authority, Authorization, and other relationship context.
+
 ---
 
-## 13. Relationships and Reported Information
+# 13. Relationships and Reported Information
 
 A Relationship may be reported rather than directly observed.
 
@@ -454,20 +605,28 @@ Conceptually:
 ```text
 Communication Event
        │
-       └── reports ──> Repair Event
+       └── reports ──> Assertion
+                            │
+                            └── refers to ──> Repair Event
 
 Technician
        │
        └── performed ──> Repair
 ```
 
-The reported relationship may therefore carry additional contextual information concerning its source, evidence, confidence, or certainty.
+The Assertion may therefore carry additional contextual information concerning:
 
-Detailed treatment of these concepts may be established by future ADE semantic layers.
+* Source
+* Evidence
+* Confidence
+* Provenance
+* Verification status
+
+The Assertion remains distinct from the underlying Event or Relationship it describes.
 
 ---
 
-## 14. Semantic Independence from Natural Language
+# 14. Semantic Independence from Natural Language
 
 ADE Relationships represent semantic connections independently from the natural language used to express them.
 
@@ -501,7 +660,7 @@ The Core Model instead establishes a common semantic structure that can be repre
 
 ---
 
-## 15. Relationship Consistency
+# 15. Relationship Consistency
 
 A relationship should have one defined semantic meaning within a given ADE context.
 
@@ -519,7 +678,7 @@ This supports predictable interpretation by both humans and machines.
 
 ---
 
-## 16. Relationship Extensibility
+# 16. Relationship Extensibility
 
 Specialized ADE frameworks may define additional relationship types.
 
@@ -546,7 +705,7 @@ Specialized relationships should:
 
 ---
 
-## 17. Core Relationship Model
+# 17. Core Relationship Model
 
 A simplified conceptual representation is:
 
@@ -556,28 +715,40 @@ A simplified conceptual representation is:
           ┌─────────────────┼─────────────────┐
           │                 │                 │
           ▼                 ▼                 ▼
-       OBJECT             EVENT            ENTITY
+       IDENTITY          OBJECT            EVENT
           │                 │                 │
-          │            ┌────┴────┐            │
-          │            ▼         ▼            │
-          │         ACTION      TIME          │
-          │            │                      │
-          └────────────┼──────────────────────┘
-                       │
-                       ▼
-                     STATE
+          ▼                 │            ┌────┴────┐
+   AUTHENTICATION            │            ▼         ▼
+          │                  │         ACTION      TIME
+          ▼                  │            │
+      AUTHORITY              │            ▼
+          │                  │          STATE
+          ▼                  │
+     CAPABILITY              │
+          │                  │
+          ▼                  │
+    AUTHORIZATION ───────────┘
+          │
+          ▼
+        ACTION
+
 
 ENTITY ── has ──> ATTRIBUTE
 ENTITY ── located at ──> LOCATION
 ENTITY ── related to ──> ENTITY
 ENTITY ── associated with ──> INTENT
+
+SOURCE ── provides ──> ASSERTION
+ASSERTION ── refers to ──> ADE CONCEPT
+ASSERTION ── has ──> CONFIDENCE
+ASSERTION ── has ──> PROVENANCE
 ```
 
 This diagram is conceptual and does not constitute a complete formal ontology.
 
 ---
 
-## 18. Foundational Principle
+# 18. Foundational Principle
 
 > **Relationships carry meaning between ADE concepts.**
 
@@ -587,7 +758,7 @@ The underlying semantic relationship should remain independent of the natural la
 
 ---
 
-## 19. Future Development
+# 19. Future Development
 
 Future ADE specifications may define:
 
@@ -600,6 +771,7 @@ Future ADE specifications may define:
 * Relationship inheritance
 * Temporal relationship models
 * Spatial relationship models
-* Provenance and evidence models
+* Advanced provenance and evidence models
+* Domain-specific authorization and capability models
 
 These mechanisms should extend the ADE-Core relationship model without unnecessarily redefining its foundational principles.
