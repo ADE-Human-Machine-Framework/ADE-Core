@@ -46,7 +46,7 @@ Defines the authoritative foundational vocabulary used throughout ADE.
 
 Describes the foundational semantic relationships between ADE concepts.
 
-### [CONTRIBUTION.md](CONTRIBUTION.md)
+### [CONTRIBUTING.md](CONTRIBUTING.md)
 
 Describes how individuals, organizations, developers, researchers, and other participants can contribute to the development of ADE standards.
 
