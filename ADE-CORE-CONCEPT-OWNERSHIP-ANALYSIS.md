@@ -67,3 +67,9 @@ Challenge
 Ownership Decision
     ↓
 ADE-Core / Framework / Shared
+
+---
+# 5. Identity Ownership Analysis
+
+**Status:** In Progress
+---
