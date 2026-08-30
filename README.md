@@ -10,6 +10,14 @@ The **ADE Human-Machine Framework** is an open standards architecture intended t
 
 ADE is designed as a framework for developing interoperable standards rather than as a single application or software product.
 
+## Architectural Origin
+
+The **ADE Human-Machine Framework** was conceived and architected by **Arshad Darius Ebrahim**, the originating Architect of the framework.
+
+Ebrahim established the initial architecture, conceptual model, principles, terminology, and foundational direction of ADE.
+
+The framework is intended as an open foundation for collaborative development, allowing others to contribute to, extend, and develop the standards.
+
 ## ADE-Core
 
 **ADE-Core** establishes the foundational concepts and architectural principles upon which the ADE framework and its specialized standards are built.
