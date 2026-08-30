@@ -390,4 +390,229 @@ The minimum Core Definition Test currently supports retaining **Identity as a fo
 The specialized identity structures and mechanisms should remain outside the Core unless future architectural analysis determines otherwise.
 
 This remains a preliminary finding until the related concepts of Authentication, Authority, Capability, Authorization, Source, Provenance, and Confidence have been evaluated.
+---
+# 6. Authentication Ownership Analysis
 
+**Status:** In Progress
+
+## 6.1 Question
+
+Determine the appropriate architectural ownership of **Authentication** within the ADE Human-Machine Framework.
+
+The analysis must determine whether Authentication should be:
+
+* An ADE-Core foundational concept
+* An ADE-IF-owned concept
+* A shared concept
+* A specialized process built upon Core Identity
+* Another architectural arrangement
+
+No final ownership decision is established by this section until the analysis is completed.
+
+---
+
+## 6.2 ADE-Core Current Position
+
+The current ADE-Core Core Model defines **Authentication** as a Core concept.
+
+ADE-Core describes Authentication as the process of establishing that an actor can demonstrate control of, or association with, an Identity.
+
+ADE-Core explicitly distinguishes Authentication from:
+
+* Identity
+* Authority
+* Capability
+* Authorization
+
+The current Core Model therefore treats Authentication as a foundational semantic concept.
+
+---
+
+## 6.3 ADE-IF Current Position
+
+ADE-IF defines Authentication within its identity architecture.
+
+Authentication is associated with establishing or verifying an actor's control of an Identity and is connected to identity credentials, verification, and authorization.
+
+ADE-IF provides the specialized identity context in which Authentication operates.
+
+The technical mechanisms and requirements for Authentication are intended to be defined by applicable standards rather than by the foundational ADE-Core model alone.
+
+---
+
+## 6.4 Dependency Relationship
+
+Authentication depends conceptually on Identity.
+
+A simplified relationship is:
+
+```text
+Entity
+   │
+   └── Identity
+         │
+         ▼
+    Authentication
+```
+
+Authentication does not create the underlying Identity.
+
+Instead, Authentication provides a means of establishing that an actor can demonstrate control of, or association with, an existing Identity.
+
+---
+
+## 6.5 Cross-Framework Test
+
+The key question is:
+
+> **Could another ADE framework require the general concept of Authentication without requiring the specialized identity architecture provided by ADE-IF?**
+
+Authentication is fundamentally concerned with establishing control of or association with an Identity.
+
+While other ADE frameworks may consume the result of Authentication, they do not necessarily need to define or implement Authentication themselves.
+
+For example:
+
+```text
+ADE-HTF
+    │
+    └── uses authenticated Entity
+              │
+              ▼
+          ADE-IF
+              │
+              └── Authentication
+```
+
+This suggests that Authentication may be a specialized identity function rather than a general Core concept.
+
+---
+
+## 6.6 Foundational vs Specialized Meaning
+
+The distinction between Identity and Authentication is important.
+
+```text
+Identity
+    =
+reference to an Entity
+
+Authentication
+    =
+process of establishing control of,
+or association with, that Identity
+```
+
+Identity can exist without Authentication.
+
+For example:
+
+```text
+Entity
+   │
+   └── Identity
+```
+
+may be represented without establishing whether the current actor controls that Identity.
+
+Authentication introduces an additional process or determination:
+
+```text
+Entity
+   │
+   └── Identity
+          │
+          └── Authentication
+```
+
+This additional function is more closely associated with the identity domain than with the general semantic foundation of ADE.
+
+---
+
+## 6.7 Relationship to Authorization
+
+Authentication should also remain distinct from Authorization.
+
+A simplified relationship is:
+
+```text
+Identity
+   ↓
+Authentication
+   ↓
+Authority / Capability
+   ↓
+Authorization
+   ↓
+Action
+```
+
+Authentication establishes an identity-related condition.
+
+Authorization determines whether an Action is permitted.
+
+Successfully authenticating an actor does not automatically authorize every possible Action.
+
+---
+
+## 6.8 Current Assessment
+
+The current documentation provides evidence that Authentication is more appropriately treated as a specialized identity function than as an ADE-Core foundational concept.
+
+The general ADE architecture can understand that an Entity may have an Identity without requiring ADE-Core to define the mechanisms by which control of that Identity is established.
+
+ADE-IF provides the natural architectural context for those mechanisms.
+
+---
+
+## 6.9 Preliminary Finding
+
+**Preliminary finding:**
+
+Authentication should be **ADE-IF owned** rather than an ADE-Core foundational concept.
+
+ADE-Core does not need to define Authentication in order to establish the foundational meaning of Entity and Identity.
+
+ADE-IF can build Authentication upon the Core Identity concept and define the specialized structures, credentials, verification processes, and technical mechanisms required for authentication.
+
+This finding remains subject to challenge and review.
+
+---
+
+## 6.10 Potential Core Model Implication
+
+If this preliminary finding is confirmed, the following change may eventually be required in `CORE-MODEL.md`:
+
+```text
+Current:
+
+Identity
+Authentication
+Authority
+Capability
+Authorization
+
+Potential future Core boundary:
+
+Identity
+```
+
+The specialized concepts would remain within ADE-IF or other applicable frameworks.
+
+No change should be made to `CORE-MODEL.md` until the related ownership analysis has progressed sufficiently to ensure that removing Authentication does not create unintended architectural gaps.
+
+---
+
+## 6.11 Next Review
+
+The next concept requiring analysis is **Authority**.
+
+Authority is more difficult than Authentication because it may have meaning beyond identity and security.
+
+The analysis should determine whether Authority is:
+
+* A general ADE relationship or concept
+* An ADE-IF identity/security concept
+* A domain-specific concept
+* A shared concept with different framework specializations
+* Undetermined pending further analysis
