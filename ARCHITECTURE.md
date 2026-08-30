@@ -22,9 +22,15 @@ The architecture establishes a common foundation while allowing specialized stan
 
 ADE follows a foundational principle:
 
-> **Common concepts should be defined once at the core and reused consistently across specialized frameworks.**
+> **Common foundational concepts should be defined once at the appropriate architectural level and reused consistently across specialized frameworks.**
 
-Specialized frameworks may extend the ADE architecture, but should not unnecessarily redefine foundational concepts established by ADE-Core.
+Specialized frameworks should not unnecessarily redefine concepts established by ADE-Core.
+
+However, the appearance of a concept in multiple frameworks does not automatically establish that the concept belongs in ADE-Core.
+
+Where a concept appears across multiple frameworks, its architectural ownership should be determined through documented analysis, challenge, and decision.
+
+Cross-framework questions that may require common ADE semantics are recorded in [ADE-CORE-FUTURE-WORK.md](ADE-CORE-FUTURE-WORK.md).
 
 ---
 
@@ -70,18 +76,15 @@ These include:
 * Standards-development principles
 * Conformance foundations
 
-Examples of foundational concepts that may be defined by ADE-Core include:
+The current ADE-Core foundational model includes concepts established
+by the Core documentation.
 
-* Entity
-* Identity
-* Relationship
-* Action
-* Event
-* State
-* Source
-* Provenance
-* Authority
-* Authorization
+Additional concepts may be considered for ADE-Core where
+cross-framework analysis demonstrates that common foundational
+semantics are required.
+
+Concepts currently under architectural consideration are tracked in
+[ADE-CORE-FUTURE-WORK.md](ADE-CORE-FUTURE-WORK.md).
 
 ADE-Core should remain as stable as reasonably possible because changes to the core may affect multiple dependent frameworks.
 
