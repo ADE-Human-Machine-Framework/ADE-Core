@@ -1455,3 +1455,622 @@ Action
 The objective is to determine whether Authorization belongs entirely within ADE-IF or whether ADE-Core requires a minimal general semantic concept for authorization decisions.
 
 ---
+# 9. Authorization Ownership Analysis
+
+**Status:** In Progress
+
+## 9.1 Question
+
+Determine the appropriate architectural ownership of **Authorization** within the ADE Human-Machine Framework.
+
+The analysis must determine whether Authorization should be:
+
+* An ADE-Core foundational concept
+* An ADE-IF-owned concept
+* A shared concept
+* A general decision structure that can be specialized by frameworks
+* Undetermined pending further analysis
+
+No final ownership decision is established by this section until the analysis is completed.
+
+---
+
+## 9.2 ADE-Core Current Position
+
+The current ADE-Core Core Model defines **Authorization** as a Core concept.
+
+ADE-Core describes Authorization as the determination that an Entity or actor is permitted to perform a specific Action within a defined context.
+
+Authorization may consider:
+
+* Identity
+* Authentication
+* Relationship
+* Authority
+* Capability
+* Time
+* Location
+* Intent
+* State
+* Applicable rules
+* Emergency conditions
+
+The current Core Model therefore places Authorization near the end of the following conceptual chain:
+
+```text
+Identity
+   ↓
+Authentication
+   ↓
+Authority
+   ↓
+Capability
+   ↓
+Authorization
+   ↓
+Action
+```
+
+---
+
+## 9.3 ADE-IF Current Position
+
+ADE-IF defines Authorization as part of its identity and access architecture.
+
+Within ADE-IF, Authorization determines whether an authenticated Entity or actor is permitted to perform an Action under applicable conditions.
+
+ADE-IF connects Authorization with:
+
+* Identity
+* Authentication
+* Authority
+* Capability
+* Context
+* Rules
+* Action
+
+ADE-IF therefore provides a specialized implementation and identity context for Authorization.
+
+---
+
+## 9.4 What Is Authorization?
+
+Authorization can be understood as a determination about whether a particular Action is permitted within a defined context.
+
+For example:
+
+```text
+Actor:
+Human A
+
+Requested Action:
+Pause Machine
+
+Context:
+Machine operating
+
+Authority:
+Safety Officer
+
+Capability:
+Pause Machine
+
+Authorization:
+Permitted
+```
+
+Authorization therefore differs from simply possessing an Identity or Authority.
+
+---
+
+## 9.5 Authorization and Identity
+
+Authorization may depend on Identity, but Identity does not necessarily require Authorization.
+
+For example:
+
+```text
+Entity
+   │
+   └── Identity
+```
+
+can exist without any authorization decision.
+
+Authorization introduces a decision about a requested or proposed Action:
+
+```text
+Entity
+   │
+   └── Identity
+          │
+          └── Authorization
+                  │
+                  └── Action
+```
+
+This suggests that Authorization is a higher-level semantic function built upon foundational concepts.
+
+---
+
+## 9.6 Authorization and Authentication
+
+Authentication and Authorization are distinct.
+
+```text
+Authentication
+    =
+establishing control of or association
+with an Identity
+
+Authorization
+    =
+determining whether an Action is permitted
+```
+
+An authenticated actor may still be denied authorization.
+
+Example:
+
+```text
+Identity:
+Human A
+
+Authentication:
+Successful
+
+Requested Action:
+Cancel Mission
+
+Authorization:
+Denied
+```
+
+Authentication therefore establishes an identity-related condition while Authorization makes an access or action decision.
+
+---
+
+## 9.7 Authorization and Authority
+
+Authority may contribute to Authorization but does not automatically determine the result.
+
+For example:
+
+```text
+Authority:
+Safety Officer
+
+Requested Action:
+Pause Machine
+
+Authorization:
+Permitted
+```
+
+while:
+
+```text
+Authority:
+Safety Officer
+
+Requested Action:
+Delete Safety Records
+
+Authorization:
+Denied
+```
+
+Authority describes standing or control.
+
+Authorization determines whether a specific Action is permitted within a defined context.
+
+---
+
+## 9.8 Authorization and Capability
+
+The relationship between Capability and Authorization depends on how Capability is ultimately defined.
+
+If Capability means:
+
+> **ability to perform an Action**
+
+then Authorization may independently determine whether that ability may be exercised.
+
+If Capability means:
+
+> **permission to perform an Action**
+
+then Capability and Authorization may overlap significantly.
+
+This reinforces the unresolved Capability ownership question.
+
+The relationship may eventually be represented as:
+
+```text
+Ability
+   +
+Authority
+   +
+Rules
+   +
+Context
+   ↓
+Authorization
+   ↓
+Action
+```
+
+or:
+
+```text
+Capability
+   +
+Context
+   +
+Rules
+   ↓
+Authorization
+   ↓
+Action
+```
+
+The final model depends on the outcome of the Capability analysis.
+
+---
+
+## 9.9 Authorization as a General Semantic Pattern
+
+Authorization may be understood more broadly than identity security.
+
+A general authorization decision can be represented as:
+
+```text
+Subject
+   +
+Requested Action
+   +
+Context
+   +
+Applicable Rules
+   ↓
+Authorization Decision
+```
+
+The Subject could potentially be:
+
+* Human
+* Organization
+* Machine
+* Device
+* Software Agent
+* System
+
+The Action could be any recognized ADE Action.
+
+This raises the possibility that Authorization is a general ADE semantic pattern rather than a concept limited to identity management.
+
+---
+
+## 9.10 Cross-Framework Test
+
+The key question is:
+
+> **Could an ADE framework other than ADE-IF require a general authorization decision?**
+
+Potentially, yes.
+
+Examples could include:
+
+```text
+Mission Framework
+    ↓
+Mission Control
+    ↓
+Authorization to alter mission state
+```
+
+or:
+
+```text
+Machine Framework
+    ↓
+Safety Control
+    ↓
+Authorization to stop equipment
+```
+
+or:
+
+```text
+Financial Framework
+    ↓
+Transaction
+    ↓
+Authorization to execute transfer
+```
+
+These examples show that authorization decisions may occur outside traditional identity management.
+
+However, such frameworks may still depend on ADE-IF for identity-related authorization mechanisms.
+
+---
+
+## 9.11 General Authorization vs Identity Authorization
+
+This suggests a possible distinction:
+
+```text
+General ADE Authorization
+        │
+        ├── Identity-based Authorization
+        │       └── ADE-IF
+        │
+        ├── Role-based Authorization
+        │
+        ├── Resource Authorization
+        │
+        ├── Operational Authorization
+        │
+        └── Domain-specific Authorization
+```
+
+ADE-Core could potentially define the general semantic relationship without defining the mechanisms used to establish identity, authority, credentials, or access control.
+
+---
+
+## 9.12 Authorization as a Decision
+
+Authorization may be better understood as a **decision or determination** rather than as a permanent property of an Entity.
+
+For example:
+
+```text
+Entity:
+Operator A
+
+Capability:
+Pause Machine
+
+Request:
+Pause Machine X
+
+Context:
+Emergency
+
+Decision:
+Authorized
+```
+
+The result may change if the context changes:
+
+```text
+Same Entity
+Same Capability
+Different Context
+        ↓
+Different Authorization Decision
+```
+
+This contextual nature distinguishes Authorization from Identity.
+
+---
+
+## 9.13 Relationship to Action
+
+Authorization is directly related to Action.
+
+A conceptual relationship is:
+
+```text
+Authorization
+      │
+      ├── permits ──> Action
+      │
+      └── denies ──> Action
+```
+
+This does not necessarily mean that an Authorization decision causes the Action.
+
+An authorized Action may never occur:
+
+```text
+Authorization:
+Permitted
+
+Action:
+Never performed
+```
+
+Likewise, an attempted Action may occur without authorization:
+
+```text
+Authorization:
+Denied
+
+Action:
+Attempted
+```
+
+The authorization decision and the Action itself must therefore remain distinct.
+
+---
+
+## 9.14 Relationship to Time and Context
+
+Authorization may be time-dependent and context-dependent.
+
+For example:
+
+```text
+Authorization:
+Permitted
+
+Time:
+09:00–17:00
+
+Location:
+Control Room
+
+Action:
+Pause Machine
+```
+
+Outside those conditions:
+
+```text
+Authorization:
+Denied
+```
+
+This indicates that Authorization is not necessarily a permanent property of an Entity.
+
+It is a contextual determination.
+
+---
+
+## 9.15 Current Assessment
+
+Authorization has characteristics of both a general ADE semantic concept and a specialized identity/access-control function.
+
+Evidence supporting a general Core concept includes:
+
+* Authorization can apply to many types of Actions.
+* The subject may be a Human, Machine, System, Organization, or Software Agent.
+* Authorization can depend on Time, Location, State, Context, and Rules.
+* Authorization may be relevant outside traditional identity management.
+
+Evidence supporting ADE-IF specialization includes:
+
+* Identity and Authentication frequently contribute to Authorization.
+* Authority and Capability are closely associated with identity and access control.
+* ADE-IF already provides detailed identity-related authorization structures.
+
+Therefore, the current overlap does not justify immediately removing Authorization from ADE-Core.
+
+---
+
+## 9.16 Preliminary Finding
+
+**Preliminary finding:**
+
+Authorization should remain **under architectural review**.
+
+There is evidence that ADE-Core may need a minimal general semantic concept representing a determination that an Action is permitted or denied within a defined context.
+
+ADE-IF may then specialize Authorization for identity, authentication, authority, capability, credential, and access-control requirements.
+
+A possible layered model is:
+
+```text
+ADE-Core
+    │
+    └── Authorization
+          │
+          └── general permission determination
+
+ADE-IF
+    │
+    └── Identity Authorization
+          │
+          ├── Identity
+          ├── Authentication
+          ├── Authority
+          ├── Capability
+          ├── Credentials
+          └── Identity Context
+```
+
+This remains a preliminary finding.
+
+---
+
+## 9.17 Current Ownership Status
+
+```text
+Authorization
+      ↓
+Undetermined
+      ↓
+Potential layered ownership
+```
+
+The final decision should consider the outcome of the Capability analysis and the broader role of Authorization across future ADE frameworks.
+
+---
+
+## 9.18 Questions Requiring Further Review
+
+The following questions should be resolved:
+
+1. Is Authorization fundamentally a general ADE concept?
+2. Is Authorization a decision, state, relationship, or event?
+3. Can Authorization exist without Identity?
+4. Can Authorization apply to Machines or Systems?
+5. Can Authorization apply to non-security Actions?
+6. Does Authorization require Authority?
+7. Does Authorization require Capability?
+8. Can an Action be authorized without Authentication?
+9. Can authorization be delegated?
+10. Can authorization expire?
+11. Can authorization be conditional?
+12. Should authorization results be represented as States?
+13. Should an Authorization decision have its own Identity?
+14. Does ADE-Core need only the general concept while ADE-IF defines identity-specific authorization mechanisms?
+
+---
+
+## 9.19 Chain Review
+
+The current preliminary ownership analysis of the related concepts is:
+
+```text
+Identity
+    ↓
+Core foundation
+    +
+ADE-IF specialization
+
+Authentication
+    ↓
+ADE-IF
+
+Authority
+    ↓
+Undetermined / potential Core foundation
+
+Capability
+    ↓
+Undetermined
+Ability vs Permission unresolved
+
+Authorization
+    ↓
+Undetermined
+Potential general Core semantic concept
+with ADE-IF specialization
+```
+
+This chain should be reviewed as a complete architectural unit before any changes are made to the ADE-Core Core Model.
+
+---
+
+## 9.20 Next Review
+
+The Identity and Authorization chain has now been analyzed at a preliminary level.
+
+The next step is **not immediately another concept**.
+
+The five concepts should first be reviewed together:
+
+```text
+Identity
+Authentication
+Authority
+Capability
+Authorization
+```
+
+The objective is to determine whether the preliminary findings form a coherent architecture.
+
+Only after that review should changes to `CORE-MODEL.md` be considered.
+
