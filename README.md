@@ -66,6 +66,22 @@ For readers new to ADE-Core, the recommended sequence is:
 
 The README provides an overview and entry point; the documents above contain the substantive foundation of ADE-Core, followed by guidance for participating in its development.
 
+## Cross-Framework Future Work
+
+As additional ADE frameworks are developed, some concepts may appear across multiple frameworks.
+
+`ADE-CORE-FUTURE-WORK.md` records these cross-framework architectural questions without automatically making those concepts ADE-Core requirements.
+
+The queue is used to determine whether a concept should ultimately be:
+
+* An ADE-Core concept
+* Framework-specific
+* Shared between frameworks
+* A framework interpretation of a Core concept
+* An interoperability relationship
+
+See [ADE-CORE-FUTURE-WORK.md](ADE-CORE-FUTURE-WORK.md).
+
 ## Core Purpose
 
 ADE-Core is intended to establish a consistent foundation for:
@@ -94,6 +110,10 @@ A framework for representing meaning and semantic relationships through a common
 ### ADE-LF — Location Framework
 
 A framework for representing and communicating location across different geographic and reference contexts.
+
+### ADE-IF — Identity & Authorization Framework
+
+A framework for representing Identity and Authorization concepts and their relationships within the ADE Human-Machine Framework.
 
 Additional frameworks may be developed as the ADE architecture evolves.
 
@@ -138,6 +158,7 @@ This repository contains the foundational material for **ADE-Core**, including:
 * Architectural specifications
 * Foundational standards
 * Supporting documentation
+* Cross-framework architectural future work
 
 Specialized ADE frameworks may be maintained in their own repositories as they mature.
 
@@ -148,6 +169,8 @@ Specialized ADE frameworks may be maintained in their own repositories as they m
 ADE-Core is an evolving open standards project. Specifications and concepts may change through the documented ADE development process.
 
 ## Contributing
+
+ADE is intended to be developed through an open and collaborative standards process.
 
 Public participation and standards development are intended to become an important part of ADE.
 
