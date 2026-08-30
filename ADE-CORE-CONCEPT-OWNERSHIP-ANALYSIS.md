@@ -2517,3 +2517,645 @@ The review should produce:
 * Any architectural questions that should be placed into ADE-CORE-FUTURE-WORK.md
 
 ---
+# 11. Final Ownership Recommendations
+
+**Status:** Proposed for Architectural Decision
+
+## 11.1 Purpose
+
+This section establishes proposed ownership decisions for the five concepts reviewed in the Identity and Authorization chain:
+
+1. Identity
+2. Authentication
+3. Authority
+4. Capability
+5. Authorization
+
+The purpose is to establish a clear architectural boundary between ADE-Core and ADE-IF before modifications are made to either framework.
+
+These recommendations remain subject to the ADE governance and review process.
+
+---
+
+## 11.2 Identity
+
+### Recommendation
+
+**Identity should remain an ADE-Core foundational concept.**
+
+### Reason
+
+Identity provides a general mechanism for distinguishing and referencing an Entity.
+
+This meaning is not limited to security, authentication, or access control.
+
+Identity may be required by:
+
+* ADE-Core
+* ADE-HTF
+* ADE-USLF
+* ADE-LF
+* ADE-IF
+* Future ADE frameworks
+
+The Core meaning should remain minimal.
+
+### ADE-Core Responsibility
+
+ADE-Core should define:
+
+* What an Identity represents
+* Its relationship to an Entity
+* The distinction between Identity and Identifier
+* The fact that an Entity may have multiple identities or identifiers
+* The distinction between Identity and Authentication
+
+### ADE-IF Responsibility
+
+ADE-IF may define:
+
+* Identity credentials
+* Identity claims
+* Identity verification
+* Identity registration
+* Identity management
+* Identity federation
+* Identity security mechanisms
+
+### Decision
+
+```text
+Identity
+    ↓
+ADE-Core
+    +
+ADE-IF specialization
+```
+
+---
+
+## 11.3 Authentication
+
+### Recommendation
+
+**Authentication should be owned by ADE-IF.**
+
+### Reason
+
+Authentication is a process for establishing control of, or association with, an Identity.
+
+It is primarily concerned with identity assurance and access-control architecture.
+
+Authentication requires mechanisms such as:
+
+* Credentials
+* Possession factors
+* Knowledge factors
+* Biometric factors
+* Cryptographic methods
+* Other verification mechanisms
+
+These are specialized identity functions rather than foundational ADE semantic concepts.
+
+### ADE-Core Responsibility
+
+ADE-Core should recognize that Authentication is distinct from Identity where necessary for interoperability.
+
+ADE-Core does not need to define authentication mechanisms.
+
+### ADE-IF Responsibility
+
+ADE-IF should define:
+
+* Authentication
+* Authentication methods
+* Credentials
+* Authentication events
+* Authentication assurance
+* Identity verification mechanisms
+* Authentication status
+* Authentication relationships
+
+### Decision
+
+```text
+Authentication
+    ↓
+ADE-IF
+```
+
+---
+
+## 11.4 Authority
+
+### Recommendation
+
+**Authority should remain an ADE-Core foundational concept, with specialized authority structures in ADE-IF.**
+
+### Reason
+
+Authority is broader than identity security.
+
+Authority may represent:
+
+* Legal authority
+* Organizational authority
+* Operational authority
+* Regulatory authority
+* Delegated authority
+* Jurisdiction
+* Control
+* Role-based standing
+
+These concepts may be required across multiple ADE frameworks.
+
+For example:
+
+```text
+Organization
+    ↓
+Authority
+    ↓
+Jurisdiction
+```
+
+does not require Authentication.
+
+Similarly:
+
+```text
+Machine
+    ↓
+Operational Authority
+```
+
+may be meaningful without an identity-security context.
+
+### ADE-Core Responsibility
+
+ADE-Core should define the general meaning of Authority and its relationship to Entities and Relationships.
+
+ADE-Core should not define detailed identity-security mechanisms for establishing Authority.
+
+### ADE-IF Responsibility
+
+ADE-IF may define:
+
+* Identity-linked Authority
+* Delegated Authority
+* Authority credentials
+* Authority verification
+* Authority levels
+* Identity-based roles
+* Authority inheritance
+
+### Decision
+
+```text
+Authority
+    ↓
+ADE-Core
+    +
+ADE-IF specialization
+```
+
+---
+
+## 11.5 Capability
+
+### Recommendation
+
+**Capability should be divided conceptually into Ability and Permission.**
+
+### Reason
+
+The analysis identified two different meanings currently represented by Capability.
+
+### Meaning 1 — Ability
+
+An Entity may have an inherent or technical ability.
+
+Examples:
+
+```text
+Human
+Ability:
+Lift 50 kg
+```
+
+```text
+Machine
+Ability:
+Lift 5,000 kg
+```
+
+```text
+Software Agent
+Ability:
+Process Images
+```
+
+This is a general semantic concept.
+
+### Meaning 2 — Permission
+
+An Entity may be permitted to perform an Action.
+
+Example:
+
+```text
+Authority:
+Safety Officer
+
+Permission:
+Pause Machine
+```
+
+This is closely associated with authorization and identity/access-control systems.
+
+These two meanings should not remain merged under a single ambiguous Core concept.
+
+### Proposed Architecture
+
+ADE-Core should use:
+
+```text
+Ability
+    =
+what an Entity can do
+```
+
+ADE-IF should use:
+
+```text
+Permission / Capability
+    =
+what an Entity is permitted to do
+```
+
+However, the exact naming of the ADE-IF concept requires further specification.
+
+### ADE-Core Responsibility
+
+ADE-Core should define:
+
+* Ability
+* The relationship between Ability and Action
+* The relationship between Ability and Entity
+* The possibility that Ability may be constrained by State, Time, Location, or other context
+
+### ADE-IF Responsibility
+
+ADE-IF should define:
+
+* Permission-based capability
+* Authority-derived permissions
+* Identity-linked permissions
+* Access-control capability
+* Permission constraints
+* Permission evaluation
+
+### Decision
+
+```text
+Capability
+    ↓
+SPLIT
+
+ADE-Core
+    ↓
+Ability
+
+ADE-IF
+    ↓
+Permission / Capability
+```
+
+The final ADE-IF terminology remains subject to detailed design.
+
+---
+
+## 11.6 Authorization
+
+### Recommendation
+
+**Authorization should have a minimal foundational meaning in ADE-Core and specialized implementation in ADE-IF.**
+
+### Reason
+
+Authorization is broader than identity security.
+
+The general semantic pattern is:
+
+```text
+Subject
+    +
+Requested Action
+    +
+Context
+    +
+Rules
+    ↓
+Authorization Decision
+```
+
+The Subject may be:
+
+* Human
+* Machine
+* Organization
+* Software Agent
+* System
+
+The Action may be operational, physical, digital, organizational, or domain-specific.
+
+Therefore, a general Authorization concept can have value outside ADE-IF.
+
+### ADE-Core Responsibility
+
+ADE-Core should define the minimal semantic meaning:
+
+> Authorization is a determination that an Action is permitted or denied within a defined context.
+
+ADE-Core should not define:
+
+* Authentication protocols
+* Credential systems
+* Access-control technologies
+* Identity federation
+* Specific policy engines
+* Security implementation mechanisms
+
+### ADE-IF Responsibility
+
+ADE-IF may define:
+
+* Identity-based Authorization
+* Authentication-dependent Authorization
+* Permission evaluation
+* Access-control rules
+* Identity policies
+* Delegated authorization
+* Credential-based authorization
+* Security-specific authorization mechanisms
+
+### Decision
+
+```text
+Authorization
+    ↓
+ADE-Core
+    +
+ADE-IF specialization
+```
+
+---
+
+# 12. Final Ownership Matrix
+
+The proposed ownership model is:
+
+| Concept        | ADE-Core |                  ADE-IF | Final Recommendation                |
+| -------------- | -------: | ----------------------: | ----------------------------------- |
+| Identity       |        ✓ |                       ✓ | Core foundation + IF specialization |
+| Authentication |        — |                       ✓ | ADE-IF                              |
+| Authority      |        ✓ |                       ✓ | Core foundation + IF specialization |
+| Capability     |  Ability | Permission / Capability | Split conceptually                  |
+| Authorization  |        ✓ |                       ✓ | Core foundation + IF specialization |
+
+This creates a clear architectural boundary.
+
+---
+
+# 13. Proposed Layered Architecture
+
+The resulting architecture can be represented as:
+
+```text
+                         ADE-CORE
+                            │
+                 ┌──────────┼──────────┐
+                 │          │          │
+              ENTITY     IDENTITY    AUTHORITY
+                 │          │          │
+                 │          │          │
+                 │          │          │
+              ABILITY      │          │
+                 │          │          │
+                 └──────────┼──────────┘
+                            │
+                            ▼
+                     AUTHORIZATION
+                            │
+                            │
+                    ┌───────┴───────┐
+                    │               │
+                    ▼               ▼
+                 ACTION          ADE-IF
+                                    │
+                         ┌──────────┼──────────┐
+                         │          │          │
+                    AUTHENTICATION PERMISSION IDENTITY
+                                    │
+                                    │
+                                    ▼
+                              SPECIALIZED
+                              AUTHORIZATION
+```
+
+The diagram represents architectural layering, not a mandatory execution sequence.
+
+---
+
+# 14. What Changes in ADE-Core
+
+Based on these recommendations, the following changes will eventually be required in `CORE-MODEL.md`.
+
+### Identity
+
+Retain Identity as a Core concept.
+
+No major architectural removal is required.
+
+### Authentication
+
+Remove Authentication as a detailed Core concept.
+
+Retain only enough reference to distinguish Identity from Authentication where necessary.
+
+### Authority
+
+Retain Authority as a Core concept.
+
+Reduce the Core definition to its general semantic meaning.
+
+Move detailed identity-specific authority mechanisms to ADE-IF.
+
+### Capability
+
+Replace the ambiguous Core definition of Capability with **Ability**.
+
+The Core should describe what an Entity can do without implying permission.
+
+### Authorization
+
+Retain a minimal Core definition of Authorization.
+
+Define it as a contextual determination that an Action is permitted or denied.
+
+Detailed identity and security mechanisms remain in ADE-IF.
+
+---
+
+# 15. What Changes in ADE-IF
+
+ADE-IF should eventually be reviewed to determine whether it requires:
+
+* Authentication
+* Identity Credentials
+* Identity Claims
+* Identity Verification
+* Authority specialization
+* Permission / Capability
+* Identity-based Authorization
+* Authorization Policies
+* Delegated Authorization
+
+ADE-IF should reference ADE-Core concepts rather than redefine them.
+
+---
+
+# 16. Important Architectural Principle
+
+The distinction established by this analysis is:
+
+```text
+ADE-Core
+    =
+What concepts mean
+
+ADE-IF
+    =
+How identity, authority, authentication,
+permission, and authorization are specialized
+and implemented
+```
+
+This prevents ADE-Core from becoming an identity-security framework while allowing ADE-IF to build a complete identity and authorization architecture on top of the Core.
+
+---
+
+# 17. Proposed Final Chain
+
+The previous chain:
+
+```text
+Identity
+    ↓
+Authentication
+    ↓
+Authority
+    ↓
+Capability
+    ↓
+Authorization
+    ↓
+Action
+```
+
+should no longer be treated as a mandatory sequence.
+
+The more accurate architecture is:
+
+```text
+ENTITY
+  │
+  ├── IDENTITY
+  │      │
+  │      └── ADE-IF
+  │             └── AUTHENTICATION
+  │
+  ├── AUTHORITY
+  │
+  ├── ABILITY
+  │
+  └── RELATIONSHIPS
+          │
+          ▼
+     AUTHORIZATION
+          │
+          ▼
+        ACTION
+```
+
+ADE-IF may provide additional relationships among:
+
+```text
+Identity
+Authentication
+Authority
+Permission
+Authorization
+```
+
+according to its specialized identity architecture.
+
+---
+
+# 18. Final Preliminary Decision
+
+The ownership analysis recommends the following:
+
+```text
+IDENTITY
+    → ADE-Core
+
+AUTHENTICATION
+    → ADE-IF
+
+AUTHORITY
+    → ADE-Core
+       + ADE-IF specialization
+
+CAPABILITY
+    → Split into:
+       ABILITY → ADE-Core
+       PERMISSION / CAPABILITY → ADE-IF
+
+AUTHORIZATION
+    → ADE-Core
+       + ADE-IF specialization
+```
+
+These recommendations provide the architectural basis for the next phase.
+
+They should be treated as **proposed architectural decisions** until incorporated through the ADE standards development and governance process.
+
+---
+
+# 19. Next Phase
+
+The next phase is not to immediately rewrite the entire Core Model.
+
+Instead, the following sequence should be followed:
+
+```text
+1. Review proposed ownership decisions
+       ↓
+2. Identify exact changes to CORE-MODEL.md
+       ↓
+3. Identify exact changes to ADE-IF
+       ↓
+4. Update Core documentation
+       ↓
+5. Update ADE-IF documentation
+       ↓
+6. Update README references where required
+       ↓
+7. Review consistency across repositories
+       ↓
+8. Commit the architectural changes
+```
+
+This preserves a clear record of why each change was made.
+---
