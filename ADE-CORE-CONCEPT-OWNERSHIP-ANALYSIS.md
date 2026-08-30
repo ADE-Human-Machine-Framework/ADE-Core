@@ -616,3 +616,399 @@ The analysis should determine whether Authority is:
 * A domain-specific concept
 * A shared concept with different framework specializations
 * Undetermined pending further analysis
+
+  ---
+  # 7. Authority Ownership Analysis
+
+**Status:** In Progress
+
+## 7.1 Question
+
+Determine the appropriate architectural ownership of **Authority** within the ADE Human-Machine Framework.
+
+The analysis must determine whether Authority should be:
+
+* An ADE-Core foundational concept
+* An ADE-IF-owned concept
+* A shared concept
+* A relationship or contextual property rather than an independent Core concept
+* A domain-specific concept
+* Undetermined pending further analysis
+
+No final ownership decision is established by this section until the analysis is completed.
+
+---
+
+## 7.2 ADE-Core Current Position
+
+The current ADE-Core Core Model defines **Authority** as a Core concept.
+
+ADE-Core describes Authority as the recognized standing, role, or level of control that an Entity or actor possesses within a defined context.
+
+Authority may be established through:
+
+* A Relationship
+* An organizational role
+* A legal or regulatory designation
+* A delegated permission
+* Other recognized mechanisms
+
+ADE-Core also distinguishes Authority from:
+
+* Identity
+* Authentication
+* Capability
+* Authorization
+
+The current Core Model therefore treats Authority as a general semantic concept.
+
+---
+
+## 7.3 ADE-IF Current Position
+
+ADE-IF includes Authority within its identity and authorization architecture.
+
+Within ADE-IF, Authority is associated with an Identity or actor and contributes to determining what Actions that actor may perform.
+
+ADE-IF also distinguishes Authority from Capability and Authorization.
+
+This establishes an important relationship:
+
+```text
+Identity
+   ↓
+Authentication
+   ↓
+Authority
+   ↓
+Capability
+   ↓
+Authorization
+   ↓
+Action
+```
+
+However, the existence of Authority within ADE-IF does not by itself establish that ADE-IF should own the general concept.
+
+---
+
+## 7.4 What Is Authority?
+
+Authority can have meaning beyond identity authentication.
+
+For example:
+
+```text
+Human
+   │
+   └── Authority
+         └── Safety Officer
+```
+
+or:
+
+```text
+Organization
+   │
+   └── Authority
+         └── Regulatory Authority
+```
+
+or:
+
+```text
+System
+   │
+   └── Authority
+         └── Control of Resource
+```
+
+These examples suggest that Authority may describe a recognized standing or control relationship rather than merely a security mechanism.
+
+---
+
+## 7.5 Authority and Identity
+
+Authority does not necessarily create Identity.
+
+A simplified relationship is:
+
+```text
+Entity
+   │
+   ├── Identity
+   │
+   └── Authority
+```
+
+An Entity may possess an Identity without possessing a particular Authority.
+
+Likewise, an Entity may have different Authorities in different contexts.
+
+For example:
+
+```text
+Entity: Human A
+
+Context 1:
+Authority = Employee
+
+Context 2:
+Authority = Safety Officer
+
+Context 3:
+Authority = Vehicle Operator
+```
+
+Authority is therefore contextual.
+
+---
+
+## 7.6 Authority and Relationship
+
+Authority may arise from a Relationship.
+
+For example:
+
+```text
+Person
+   │
+   └── employed by
+          │
+          ▼
+      Organization
+```
+
+The employment relationship may provide the context in which a particular Authority is recognized.
+
+Similarly:
+
+```text
+Organization
+   │
+   └── appoints
+          │
+          ▼
+       Person
+          │
+          └── Authority
+                = Safety Officer
+```
+
+This suggests that Authority may be represented as a semantic concept associated with Relationships rather than being limited to identity infrastructure.
+
+---
+
+## 7.7 Authority and Capability
+
+Authority and Capability should remain distinct.
+
+A simplified model is:
+
+```text
+Authority
+    ↓
+provides or establishes
+    ↓
+Capability
+    ↓
+may contribute to
+    ↓
+Authorization
+```
+
+For example:
+
+```text
+Authority:
+Safety Officer
+
+Capability:
+Pause Machine
+
+Authorization:
+Permitted to pause Machine X
+under defined conditions
+```
+
+Authority therefore describes recognized standing or control, while Capability describes what that standing enables.
+
+---
+
+## 7.8 Authority and Authorization
+
+Authority does not automatically equal Authorization.
+
+For example:
+
+```text
+Authority:
+Safety Officer
+
+Requested Action:
+Cancel Mission
+
+Authorization:
+Denied
+```
+
+The actor may possess Authority while still lacking Authorization for a particular Action.
+
+Authorization depends on the complete context and applicable rules.
+
+---
+
+## 7.9 Cross-Framework Test
+
+The key question is:
+
+> **Could an ADE framework other than ADE-IF require the concept of Authority without requiring identity authentication or authorization mechanisms?**
+
+Potentially, yes.
+
+For example, a future framework could represent:
+
+```text
+Organization
+   │
+   └── Authority
+         └── Regulatory Jurisdiction
+```
+
+or:
+
+```text
+Human
+   │
+   └── Authority
+         └── Operational Role
+```
+
+or:
+
+```text
+Entity
+   │
+   └── Authority
+         └── Control of Resource
+```
+
+These uses do not inherently require Authentication or Authorization.
+
+This provides evidence that Authority may have a broader semantic role than ADE-IF alone.
+
+---
+
+## 7.10 Core vs Specialized Boundary
+
+A possible layered model is:
+
+```text
+ADE-Core
+    │
+    └── Authority
+          │
+          └── foundational meaning:
+              recognized standing, role,
+              or control within a context
+
+ADE-IF
+    │
+    └── Authority specialization
+          │
+          ├── Identity-related authority
+          ├── Delegated authority
+          ├── Authority relationships
+          ├── Capability
+          └── Authorization
+```
+
+Under this model, ADE-Core would define only the general semantic meaning of Authority.
+
+ADE-IF would define identity and authorization-specific uses.
+
+---
+
+## 7.11 Alternative Model
+
+An alternative is to make Authority entirely ADE-IF owned:
+
+```text
+ADE-Core
+    └── Identity
+
+ADE-IF
+    ├── Authentication
+    ├── Authority
+    ├── Capability
+    └── Authorization
+```
+
+This would make the Core smaller but would also prevent other ADE frameworks from using Authority as a general semantic concept without depending on ADE-IF.
+
+---
+
+## 7.12 Current Assessment
+
+Authority appears to have a broader semantic meaning than Authentication or Authorization.
+
+It may describe recognized standing, role, jurisdiction, or control within a defined context.
+
+Those meanings can exist independently of authentication.
+
+There is therefore reasonable evidence that a minimal foundational concept of Authority could have a legitimate role within ADE-Core.
+
+However, the specialized identity, capability, delegation, and authorization structures associated with Authority are more appropriately addressed by ADE-IF or other applicable frameworks.
+
+---
+
+## 7.13 Preliminary Finding
+
+**Preliminary finding:**
+
+Authority should remain **under consideration as a potential ADE-Core foundational concept**, with ADE-IF defining specialized identity and authorization-related uses.
+
+Unlike Authentication, Authority cannot currently be classified as purely ADE-IF owned.
+
+The Core definition should remain minimal if Authority is retained.
+
+A potential Core meaning is:
+
+> **Authority represents recognized standing, role, jurisdiction, or control associated with an Entity within a defined context.**
+
+This is a preliminary finding and remains subject to challenge and further architectural review.
+
+---
+
+## 7.14 Questions Requiring Further Review
+
+Before a final ownership decision is made, the following questions should be examined:
+
+1. Can Authority exist without Identity?
+2. Can Authority be represented through a Relationship rather than as an independent concept?
+3. Is Authority always associated with an Entity?
+4. Can Machines and Software Agents possess Authority?
+5. Can Authority be delegated?
+6. Can Authority expire or change over Time?
+7. Does Authority always imply Capability?
+8. Can Capability exist without Authority?
+9. Is jurisdiction a form of Authority or a separate concept?
+10. Does Authority require a Source or Assertion to establish it?
+
+These questions may affect the final Core boundary.
+
+---
+
+## 7.15 Next Review
+
+The next concept requiring analysis is **Capability**.
+
+Capability should be examined in relation to Authority and Authorization to determine whether it is:
+
+* A general Core concept
+* An ADE-IF concept
+* A property derived from Authority
+* A permission-like semantic structure
+* A specialized authorization concept
+* Undetermined pending further analysis
+
