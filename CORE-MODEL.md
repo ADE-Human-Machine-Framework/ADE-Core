@@ -103,14 +103,22 @@ ADE establishes foundational concepts across several related areas.
 
 ### Authority and Control
 
-16. Authentication
-17. Authority
-18. Capability
-19. Authorization
+16. Authority
+17. Ability
+18. Authorization
 
 These concepts are related but are not necessarily equivalent in architectural role.
 
 The Core Model establishes the foundational meaning and relationships of these concepts. Specialized ADE frameworks may extend them for particular domains without redefining their foundational meaning.
+
+Identity and Authority are foundational ADE-Core concepts that may be specialized by ADE-IF and other ADE frameworks.
+
+Authentication is not defined as an independent ADE-Core concept. Detailed authentication architecture is provided by ADE-IF.
+
+Ability represents what an Entity can do and is distinct from Permission, which represents what an Entity is permitted to do.
+
+Authorization provides the foundational semantic determination of whether an Action is permitted within a defined context. Specialized authorization mechanisms may be defined by ADE-IF and other ADE frameworks.
+
 
 ---
 
@@ -161,16 +169,20 @@ Additional specialized Entity types may be defined by future ADE frameworks.
 
 An **Identity** provides a persistent reference to a specific Entity within an ADE context.
 
-An Identity does not necessarily contain all information about the Entity. It provides a means by which the Entity can be distinguished, referenced, or associated with information held by authorized sources.
+An Identity does not necessarily contain all information about the Entity. It provides a means by which the Entity can be distinguished, referenced, or associated with information held by authorized Sources.
 
 An Entity may have one or more identities or identifiers depending on the context in which it is represented.
 
+Identity is a foundational ADE-Core concept and should remain distinct from specialized identity mechanisms defined by ADE-IF or other ADE frameworks.
+
 Identity should remain distinct from:
 
-* **Authentication** — establishing that an actor can demonstrate control of an Identity.
-* **Authority** — the standing or level of control associated with an Entity or actor.
-* **Capability** — an action or function that an authority permits.
-* **Authorization** — determining whether an Entity or actor is permitted to perform a specific action.
+* **Authentication** — establishing that an actor can demonstrate control of, or association with, an Identity.
+* **Authority** — the recognized standing, responsibility, or level of control associated with an Entity within a defined context.
+* **Ability** — what an Entity can do.
+* **Authorization** — determining whether an Entity or actor is permitted to perform a specific Action within a defined context.
+
+ADE-Core defines the general semantic meaning of Identity. ADE-IF may extend this foundation with specialized identity architecture, including credentials, identity claims, identity verification, authentication, identity federation, and identity-related authority.
 
 An Identity may be associated with information held by independent authoritative Sources without requiring ADE to duplicate or centrally store that information.
 
@@ -191,6 +203,8 @@ Entity
 The existence of an Identity does not by itself establish the truth of every Assertion associated with that Identity.
 
 Identity therefore provides a reference to an Entity while allowing associated information, verification, authority, and authorization to remain distinct concepts.
+
+Detailed identity-management and identity-assurance mechanisms are outside the scope of ADE-Core and may be defined by ADE-IF or other specialized ADE frameworks.
 
 ---
 
@@ -613,156 +627,295 @@ Confidence does not by itself establish truth. The method used to determine or c
 
 ## 4.16 Authentication
 
-**Authentication** represents the process of establishing that an actor can demonstrate control of, or association with, an Identity.
+Authentication is **not defined as an independent foundational concept within ADE-Core**.
 
-Authentication is distinct from Identity.
+Authentication establishes that an actor can demonstrate control of, or association with, an Identity. It is therefore distinct from Identity and from Authorization.
 
-Authentication may use one or more mechanisms, including:
+The foundational distinction is:
 
-* Knowledge factors
+```text
+Identity
+    ↓
+may be subject to
+    ↓
+Authentication
+```
+
+ADE-Core recognizes Authentication as a concept that may be required when establishing identity assurance, but does not define authentication methods, credentials, protocols, assurance levels, or security mechanisms.
+
+Detailed Authentication architecture is defined by **ADE-IF — Identity Framework** and may include:
+
+* Authentication methods
+* Credentials
+* Cryptographic proofs
 * Possession factors
+* Knowledge factors
 * Biometric factors
-* Cryptographic credentials
-* Physical credentials
-* Other recognized authentication mechanisms
+* Authentication assurance
+* Identity verification mechanisms
+* Authentication status
 
 Authentication does not by itself establish that an actor is authorized to perform a particular Action.
 
-For example:
+The distinction is therefore:
 
 ```text
 Identity
     ↓
 Authentication
     ↓
-Authority
-    ↓
 Authorization
     ↓
 Action
 ```
 
-The specific technical mechanisms used for authentication may be defined by applicable ADE standards or external systems.
+The specific technical mechanisms used for Authentication are outside the scope of ADE-Core.
 
 ---
 
 ## 4.17 Authority
 
-**Authority** represents the recognized standing, role, or level of control that an Entity or actor possesses within a defined context.
+**Authority** represents the recognized standing, responsibility, role, jurisdiction, or level of control that an Entity possesses within a defined context.
 
 Authority may be established through:
 
 * A Relationship
 * An organizational role
 * A legal or regulatory designation
-* A delegated permission
+* A delegated responsibility
+* A recognized operational role
 * Other recognized mechanisms
 
-Authority does not automatically grant permission to perform every Action.
+Authority is contextual and does not automatically grant permission to perform every Action.
 
 For example:
 
 ```text
-Human
-Authority Level = 3
+Entity
+    ↓
+Authority
+    ↓
+Recognized responsibility
 ```
 
-may indicate a recognized safety authority while still limiting the Actions that the Human may perform.
+An Entity may possess Authority without being authorized to perform a particular Action.
 
-Authority may be contextual, time-limited, delegated, or otherwise qualified.
+For example:
+
+```text
+Authority
+    ↓
+Safety Officer
+    ↓
+Recognized responsibility
+```
+
+does not necessarily mean:
+
+```text
+Safety Officer
+    ↓
+Authorized
+    ↓
+Every possible Action
+```
+
+Authority may be:
+
+* Contextual
+* Time-limited
+* Delegated
+* Conditional
+* Restricted by Location
+* Restricted by State
+* Associated with a Relationship
+
+ADE-Core defines the general semantic meaning of Authority.
+
+ADE-IF may specialize Authority for identity-related purposes, including:
+
+* Identity authorities
+* Credential authorities
+* Identity registration authorities
+* Identity verification authorities
+* Delegated identity authority
+* Authority associated with identity claims
+
+Authority should remain distinct from:
+
+* **Identity** — the reference by which an Entity may be distinguished or represented.
+* **Authentication** — establishing control of, or association with, an Identity.
+* **Ability** — what an Entity can do.
+* **Permission** — what an Entity is permitted to do.
+* **Authorization** — determining whether a specific Action is permitted within a defined context.
+
+Authority therefore represents recognized standing, responsibility, or control rather than the permission to perform every possible Action.
 
 ---
 
-## 4.18 Capability
+## 4.18 Ability
 
-A **Capability** represents an Action or class of Actions that an Authority permits an Entity or actor to perform within a defined context.
+**Ability** represents what an Entity can do, perform, support, or otherwise accomplish within a defined context.
+
+Ability describes capability in the general semantic sense and does not by itself establish that an Entity is permitted to perform an Action.
+
+Examples include:
+
+```text
+Human
+Ability:
+Lift 50 kg
+```
+
+```text
+Machine
+Ability:
+Lift 5,000 kg
+```
+
+```text
+Software Agent
+Ability:
+Process Images
+```
+
+An Ability may be constrained or qualified by:
+
+* State
+* Time
+* Location
+* Resources
+* Conditions
+* Other applicable context
+
+Ability should remain distinct from:
+
+* **Authority** — the recognized standing, responsibility, role, jurisdiction, or control associated with an Entity.
+* **Permission** — what an Entity is permitted to do.
+* **Authorization** — the determination that a specific Action is permitted within a defined context.
 
 For example:
 
 ```text
-Authority Level 3
-
-Capabilities:
-    Pause Machine = Yes
-    Cancel Mission = No
-    Modify Mission = No
+Machine
+    │
+    ├── Ability
+    │     └── Lift 5,000 kg
+    │
+    └── Permission
+          └── Lift 2,000 kg loads
 ```
 
-Capabilities may be constrained by:
+An Entity may therefore have an Ability without having Permission to exercise that Ability in a particular context.
 
-* Time
-* Location
-* Relationship
-* Purpose
-* State
-* Emergency conditions
-* Other applicable rules
+Detailed Permission and identity- or access-related Capability models may be defined by ADE-IF or other specialized ADE frameworks.
 
-Capability therefore provides a distinction between the standing of an Entity and the specific functions that standing enables.
+ADE-Core uses Ability to describe what an Entity can do without implying that the Entity is authorized or permitted to perform the corresponding Action.
 
 ---
 
 ## 4.19 Authorization
 
-**Authorization** represents the determination that an Entity or actor is permitted to perform a specific Action within a defined context.
+**Authorization** represents the determination that an Entity or actor is permitted or denied to perform a specific Action within a defined context.
+
+Authorization is a foundational semantic concept and is distinct from Identity, Authentication, Authority, Ability, and Permission.
+
+The general authorization pattern is:
+
+```text
+Subject
+    +
+Requested Action
+    +
+Context
+    +
+Applicable Rules
+    ↓
+Authorization Decision
+    ↓
+Permitted / Denied
+```
 
 Authorization may consider:
 
 * Identity
 * Authentication
-* Relationship
 * Authority
-* Capability
+* Ability
+* Permission
 * Time
 * Location
-* Purpose or Intent
 * State
+* Relationship
+* Intent or Purpose
 * Applicable rules
 * Emergency conditions
+* Other defined context
+
+Authorization does not mean that an Action actually occurred.
 
 For example:
 
 ```text
-Authenticated Actor
-        +
-Authority Level 3
-        +
-Capability = Pause Machine
-        +
-Safety Condition
-        ↓
 Authorization
-        ↓
-PAUSE
+    ↓
+Permitted
+    ↓
+Action never performed
 ```
 
-Authorization should remain distinct from authentication.
-
-Authentication establishes that an actor can demonstrate control of an Identity. Authorization determines whether that actor is permitted to perform the requested Action.
-
-Authorization may also support collective or conditional authority.
-
-For example:
+is distinct from:
 
 ```text
-Human Level 3
-       +
-Human Level 3
-       +
-Human Level 3
-       ↓
-Emergency Rule
-       ↓
-Authorization to Pause
+Authorization
+    ↓
+Permitted
+    ↓
+Action performed
 ```
 
-The specific authority levels, capabilities, thresholds, and emergency rules may be defined by applicable ADE standards or domain-specific requirements.
+Similarly:
+
+```text
+Authorization
+    ↓
+Denied
+    ↓
+Action attempted
+```
+
+may represent an attempted Action that was not authorized.
+
+ADE-Core defines the general semantic meaning of Authorization as a contextual determination concerning whether an Action is permitted or denied.
+
+ADE-IF may specialize Authorization for identity and access-control purposes, including:
+
+* Identity-based authorization
+* Authentication-dependent authorization
+* Permission evaluation
+* Access-control policies
+* Credential-based authorization
+* Delegated authorization
+* Identity-related authorization rules
+
+Authorization should remain distinct from:
+
+* **Identity** — the reference by which an Entity may be distinguished or represented.
+* **Authentication** — establishing control of, or association with, an Identity.
+* **Authority** — recognized standing, responsibility, role, jurisdiction, or control.
+* **Ability** — what an Entity can do.
+* **Permission** — what an Entity is permitted to do.
+* **Action** — something performed, initiated, or carried out by an Entity.
+
+The specific mechanisms used to evaluate or enforce Authorization are outside the scope of ADE-Core unless explicitly defined by a future Core standard.
 
 ---
 
 # 5. Core Relationships
 
-The ADE Core Model establishes the following foundational relationships:
+The ADE Core Model establishes foundational relationships between ADE concepts.
+
+These relationships describe general semantic connections and do not prescribe a specific technical implementation.
 
 1. Entities may participate in Events.
 2. Events may contain or reference Actions.
@@ -771,21 +924,84 @@ The ADE Core Model establishes the following foundational relationships:
 5. Entities may have Attributes.
 6. Entities may have States.
 7. Entities may have one or more Identities or identifiers.
-8. Events, Actions, States, Attributes, and Relationships may have temporal context.
-9. Events and Actions may have spatial context.
-10. Entities may be connected through Relationships.
-11. Entities, Events, and Actions may be associated with Intent.
-12. Assertions may be associated with Sources.
-13. Assertions may describe or refer to Entities, Events, Actions, States, Attributes, or Relationships.
-14. Assertions may have Confidence and Provenance.
-15. Sources may provide information about Entities and other ADE concepts.
-16. Authentication may establish control of or association with an Identity.
-17. Authority may be associated with an Entity through a Relationship or other recognized mechanism.
-18. Authority may provide one or more Capabilities.
-19. Authorization may determine whether a specific Action is permitted.
-20. Authorized Actions may be performed by Entities, including Humans, Machines, Devices, Software Agents, and Systems where applicable.
+8. Entities may possess Authority within a defined context.
+9. Entities may have Abilities that describe what they can do.
+10. Events, Actions, States, Attributes, and Relationships may have temporal context.
+11. Events and Actions may have spatial context.
+12. Entities may be connected through Relationships.
+13. Entities, Events, and Actions may be associated with Intent.
+14. Assertions may be associated with Sources.
+15. Assertions may describe or refer to Entities, Events, Actions, States, Attributes, or Relationships.
+16. Assertions may have Confidence and Provenance.
+17. Sources may provide information about Entities and other ADE concepts.
+18. Authentication may establish control of or association with an Identity.
+19. Authority may be associated with an Entity through a Relationship or other recognized mechanism.
+20. Authorization may determine whether a specific Action is permitted or denied within a defined context.
+21. Authorized Actions may be performed by Entities, including Humans, Machines, Devices, Software Agents, and Systems where applicable.
+22. Specialized ADE frameworks may extend these relationships without redefining their foundational Core meaning.
 
-These relationships are foundational and may be extended by specialized ADE frameworks.
+The following conceptual relationships summarize important distinctions within the Core Model:
+
+```text
+ENTITY
+   │
+   ├── IDENTITY
+   │
+   ├── AUTHORITY
+   │
+   ├── ABILITY
+   │
+   ├── ATTRIBUTE
+   │
+   ├── STATE
+   │
+   └── RELATIONSHIP
+
+
+IDENTITY
+   │
+   └── may be subject to
+          │
+          ▼
+     AUTHENTICATION
+     (specialized by ADE-IF)
+
+
+AUTHORITY
+   │
+   └── may contribute to
+          │
+          ▼
+     AUTHORIZATION
+          │
+          ▼
+        ACTION
+
+
+ABILITY
+   │
+   └── describes what an Entity can do
+
+PERMISSION
+   │
+   └── describes what an Entity is permitted to do
+       (specialized by ADE-IF)
+
+
+AUTHORIZATION
+   │
+   ├── considers context and applicable rules
+   │
+   └── determines:
+          ├── Permitted
+          └── Denied
+```
+
+These relationships are conceptual and do not constitute a complete formal ontology.
+
+Authentication, Permission, and specialized identity or access-control mechanisms may be defined by ADE-IF.
+
+The Core Model establishes the general semantic relationships required for interoperability while allowing specialized ADE frameworks to provide more detailed models and implementation requirements.
 
 ---
 
@@ -927,21 +1143,144 @@ Human Operator
     │
     ├── IDENTITY
     │
-    ├── AUTHENTICATION
+    ├── AUTHORITY
+    │
+    ├── ABILITY
+    │     Pause Machine
+    │
+    └── AUTHORIZATION
+          │
+          ├── Context
+          │
+          ├── Applicable Rules
+          │
+          └── Decision
+                │
+                ▼
+             PERMITTED
+                │
+                ▼
+              ACTION
+                │
+                ▼
+             MACHINE
+```
+
+Where identity assurance is required, a specialized ADE-IF process may establish Authentication of the Human Operator's Identity before Authorization is evaluated:
+
+```text
+IDENTITY
+    │
+    ▼
+AUTHENTICATION
+   (ADE-IF)
+    │
+    ▼
+AUTHORIZATION
+    │
+    ▼
+ACTION
+```
+
+Ability and Authorization remain distinct.
+
+For example, an operator may have the Ability to pause a machine but may not be Authorized to do so in a particular context.
+
+These examples are conceptual and do not constitute complete formal representations.
+# 9. Core Model Example
+
+A machine repair can be represented conceptually as:
+
+```text
+ENTITY
+Machine
+    │
+    │ participates in
+    ▼
+EVENT
+Machine Repair
+    │
+    ├── ACTION
+    │     Repair
+    │
+    ├── TIME
+    │     Start: 10:15
+    │     End:   10:55
+    │     Duration: 40 minutes
+    │
+    ├── LOCATION
+    │     Maintenance Bay 2
+    │
+    ├── INTENT
+    │     Restore operation
+    │
+    ├── SOURCE
+    │     Maintenance System
+    │
+    ├── ASSERTION
+    │     Repair completed
+    │
+    ├── CONFIDENCE
+    │     High
+    │
+    └── STATE CHANGE
+          Available
+             ↓
+          Unavailable
+             ↓
+          Available
+```
+
+An authorized machine operation may additionally be represented conceptually as:
+
+```text
+ENTITY
+Human Operator
+    │
+    ├── IDENTITY
     │
     ├── AUTHORITY
     │
-    └── CAPABILITY
+    ├── ABILITY
+    │     Pause Machine
+    │
+    └── AUTHORIZATION
           │
-          ▼
-    AUTHORIZATION
+          ├── Context
           │
-          ▼
-       ACTION
+          ├── Applicable Rules
           │
-          ▼
-      MACHINE
+          └── Decision
+                │
+                ▼
+             PERMITTED
+                │
+                ▼
+              ACTION
+                │
+                ▼
+             MACHINE
 ```
+
+Where identity assurance is required, a specialized ADE-IF process may establish Authentication of the Human Operator's Identity before Authorization is evaluated:
+
+```text
+IDENTITY
+    │
+    ▼
+AUTHENTICATION
+   (ADE-IF)
+    │
+    ▼
+AUTHORIZATION
+    │
+    ▼
+ACTION
+```
+
+Ability and Authorization remain distinct.
+
+For example, an operator may have the Ability to pause a machine but may not be Authorized to do so in a particular context.
 
 These examples are conceptual and do not constitute complete formal representations.
 
@@ -956,57 +1295,108 @@ A simplified representation of the ADE Core Model is:
 
                          ENTITY
                            │
-              ┌────────────┴────────────┐
-              │                         │
-           IDENTITY                 RELATIONSHIP
-              │                         │
-       AUTHENTICATION              connects Entities
+              ┌────────────┼────────────┐
+              │            │            │
+           IDENTITY     AUTHORITY      ABILITY
+              │            │            │
+              │            │            └── What Entity can do
+              │            │
+              │            └── Recognized standing,
+              │                responsibility, role,
+              │                jurisdiction, or control
               │
-          AUTHORITY
-              │
-         CAPABILITY
-              │
-       AUTHORIZATION
-              │
-            ACTION
-              │
-              ├────────── affects ──────────> ENTITY
-              │
-              └──────── performed by ──────> ENTITY
+              └── Reference by which
+                  Entity may be distinguished
 
 
-    ENTITY
-       ├── OBJECT
-       ├── ATTRIBUTE
-       ├── LOCATION
-       ├── RELATIONSHIP
-       └── INTENT
+                         ENTITY
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+           OBJECT         EVENT        ACTION
+                           │            │
+                           │            ├── performed by → ENTITY
+                           │            │
+                           │            └── affects → ENTITY
+                           │
+                           ├── TIME
+                           ├── LOCATION
+                           ├── STATE
+                           ├── SOURCE
+                           ├── ASSERTION
+                           └── INTENT
 
 
-    EVENT
-       ├── ACTION
-       ├── TIME
-       ├── LOCATION
-       ├── STATE
-       ├── SOURCE
-       ├── ASSERTION
-       └── INTENT
+                       IDENTITY
+                           │
+                           │ may be subject to
+                           ▼
+                    AUTHENTICATION
+                      (ADE-IF)
+                           │
+                           │ may provide identity assurance
+                           ▼
+                     AUTHORIZATION
+                           │
+                           ├── considers Authority
+                           ├── considers Ability
+                           ├── considers Permission
+                           ├── considers Context
+                           └── considers Rules
+                           │
+                           ▼
+                    PERMITTED / DENIED
+                           │
+                           ▼
+                         ACTION
 
 
-    SOURCE
-       │
-       ▼
-    ASSERTION
-       │
-       ├── CONFIDENCE
-       └── PROVENANCE
+                       SOURCE
+                           │
+                           ▼
+                       ASSERTION
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                CONFIDENCE    PROVENANCE
 
 
-    TIME
-       ├── TIME POINT
-       ├── DURATION
-       └── TIME INTERVAL
+                         TIME
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+          TIME POINT    DURATION   TIME INTERVAL
 ```
+
+### Foundational distinctions
+
+The Core Model maintains the following distinctions:
+
+```text
+IDENTITY
+Who or what is being referenced?
+
+AUTHENTICATION
+Can control of or association with that Identity be established?
+
+AUTHORITY
+What recognized standing, responsibility, role, jurisdiction,
+or control does the Entity possess?
+
+ABILITY
+What can the Entity do?
+
+PERMISSION
+What is the Entity permitted to do?
+
+AUTHORIZATION
+Is a specific Action permitted within this context?
+
+ACTION
+What is actually performed?
+```
+
+Authentication, Permission, and specialized identity or access-control mechanisms may be defined by ADE-IF.
 
 This diagram is conceptual and does not constitute a complete formal ontology.
 
