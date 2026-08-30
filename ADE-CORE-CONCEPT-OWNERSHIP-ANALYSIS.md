@@ -1011,4 +1011,447 @@ Capability should be examined in relation to Authority and Authorization to dete
 * A permission-like semantic structure
 * A specialized authorization concept
 * Undetermined pending further analysis
+---
+# 8. Capability Ownership Analysis
 
+**Status:** In Progress
+
+## 8.1 Question
+
+Determine the appropriate architectural ownership of **Capability** within the ADE Human-Machine Framework.
+
+The analysis must determine whether Capability should be:
+
+* An ADE-Core foundational concept
+* An ADE-IF-owned concept
+* A shared concept
+* A property or consequence of Authority
+* A specialized authorization concept
+* Undetermined pending further analysis
+
+No final ownership decision is established by this section until the analysis is completed.
+
+---
+
+## 8.2 ADE-Core Current Position
+
+The current ADE-Core Core Model defines **Capability** as a Core concept.
+
+ADE-Core describes Capability as an Action or class of Actions that an Authority permits an Entity or actor to perform within a defined context.
+
+The current model therefore places Capability between Authority and Authorization:
+
+```text
+Authority
+    ↓
+Capability
+    ↓
+Authorization
+    ↓
+Action
+```
+
+---
+
+## 8.3 ADE-IF Current Position
+
+ADE-IF includes Capability within its identity and authorization architecture.
+
+Within ADE-IF, Capability represents what an Authority permits an Entity or actor to perform.
+
+Capability may be constrained by factors such as:
+
+* Time
+* Location
+* Relationship
+* Purpose
+* State
+* Emergency conditions
+* Applicable rules
+
+ADE-IF therefore provides a specialized context for using Capability in identity and authorization decisions.
+
+---
+
+## 8.4 What Is Capability?
+
+A Capability can be understood as an ability, permission, or allowed class of Action available to an Entity within a defined context.
+
+For example:
+
+```text
+Entity:
+Technician
+
+Capability:
+Repair Machine
+```
+
+Another example:
+
+```text
+Entity:
+Safety Officer
+
+Capability:
+Pause Machine
+```
+
+Capability describes what an Entity may be able or permitted to do.
+
+It does not necessarily establish that the Entity is currently authorized to perform the Action in every circumstance.
+
+---
+
+## 8.5 Capability and Authority
+
+The current ADE-Core model treats Authority as a source or basis for Capability.
+
+For example:
+
+```text
+Authority:
+Safety Officer
+
+Capability:
+Pause Machine
+```
+
+However, this relationship may not always be one-to-one.
+
+An Entity may have:
+
+```text
+Authority:
+Vehicle Operator
+
+Capabilities:
+Operate Vehicle
+Inspect Vehicle
+Report Fault
+```
+
+Authority may therefore establish a set of Capabilities.
+
+---
+
+## 8.6 Capability and Authorization
+
+Capability should remain distinct from Authorization.
+
+A Capability may describe what an Entity is permitted or equipped to do in general.
+
+Authorization determines whether the Action is permitted under the specific circumstances of a particular request.
+
+For example:
+
+```text
+Entity:
+Safety Officer
+
+Capability:
+Pause Machine
+
+Current Context:
+Machine operating normally
+
+Authorization:
+Permitted
+```
+
+But:
+
+```text
+Entity:
+Safety Officer
+
+Capability:
+Pause Machine
+
+Current Context:
+Action restricted by higher-priority rule
+
+Authorization:
+Denied
+```
+
+This distinction suggests:
+
+```text
+Capability
+    =
+potential or standing permission
+
+Authorization
+    =
+contextual determination for a specific Action
+```
+
+---
+
+## 8.7 Capability and Physical or Technical Ability
+
+Capability may also have a meaning broader than permission.
+
+For example:
+
+```text
+Machine
+Capability:
+Lift 5,000 kg
+```
+
+This describes what the Machine is capable of doing physically or technically.
+
+Similarly:
+
+```text
+Software Agent
+Capability:
+Process Image
+```
+
+describes a functional ability.
+
+This creates an important architectural question.
+
+There may be two related but distinct meanings:
+
+```text
+Capability
+    ├── Ability
+    │     Physical / technical function
+    │
+    └── Permission
+          Authorized or permitted function
+```
+
+If both meanings are retained, ADE must determine whether they are the same concept with different contexts or separate concepts.
+
+---
+
+## 8.8 Cross-Framework Test
+
+The key question is:
+
+> **Could an ADE framework other than ADE-IF require Capability without requiring Identity, Authority, or Authorization?**
+
+Potentially, yes.
+
+For example, ADE-HTF could describe:
+
+```text
+Human
+Capability:
+Run 10 km
+```
+
+ADE-LF could potentially describe:
+
+```text
+Location System
+Capability:
+Represent geographic position
+```
+
+A future Machine or Resource framework could describe:
+
+```text
+Machine
+Capability:
+Lift 5,000 kg
+```
+
+These examples suggest that Capability may have a general semantic meaning independent of identity security.
+
+However, these examples also reveal that "capability" may mean **ability**, while ADE-IF uses Capability primarily in the sense of **permitted Action**.
+
+That distinction must be resolved before ownership is determined.
+
+---
+
+## 8.9 Potential Architectural Split
+
+A possible architecture is:
+
+```text
+ADE-Core
+    │
+    └── Capability
+          │
+          ├── Ability
+          │
+          └── Permission-related capability
+
+ADE-IF
+    │
+    └── Authorization Capability
+          │
+          └── Identity / Authority context
+```
+
+Another possibility is:
+
+```text
+ADE-Core
+    └── Ability
+
+ADE-IF
+    └── Capability
+          = permission to perform an Action
+```
+
+A third possibility is to retain Capability as a single Core concept with clearly defined contextual meanings.
+
+---
+
+## 8.10 Relationship to Action
+
+Capability is strongly connected to Action.
+
+A conceptual relationship is:
+
+```text
+Entity
+   │
+   └── Capability
+          │
+          └── permits or enables
+                    │
+                    ▼
+                  Action
+```
+
+This relationship may be useful outside identity and authorization.
+
+For example:
+
+```text
+Machine
+    Capability:
+    Lift Load
+
+Action:
+    Lift Load
+```
+
+This does not require authentication or authorization.
+
+---
+
+## 8.11 Relationship to State
+
+Capability may also depend on State.
+
+For example:
+
+```text
+Machine
+State:
+Maintenance
+
+Capability:
+Lift Load
+
+Current effective capability:
+Unavailable
+```
+
+The Machine may possess the underlying capability while being unable to exercise it in its current State.
+
+This reinforces the distinction between Capability and Authorization.
+
+---
+
+## 8.12 Current Assessment
+
+Capability presents a more complex ownership question than Authentication.
+
+There is evidence that Capability has a legitimate general semantic meaning outside identity and authorization.
+
+However, the current ADE-Core definition uses Capability primarily as a permission derived from Authority.
+
+ADE-IF uses the same concept within an identity and authorization context.
+
+The concept may therefore be conflating:
+
+1. **Ability** — what an Entity can do.
+2. **Permission** — what an Entity is permitted to do.
+
+These meanings should not be merged without further architectural examination.
+
+---
+
+## 8.13 Preliminary Finding
+
+**Preliminary finding:**
+
+Capability should **remain under architectural review** rather than being immediately assigned to ADE-Core or ADE-IF.
+
+There is evidence supporting a general Core concept if Capability is defined as an Entity's ability or potential to perform an Action.
+
+There is also evidence supporting ADE-IF ownership if Capability is defined specifically as a permission granted through Authority.
+
+The distinction between **ability** and **permission** must therefore be resolved before a final ownership decision is made.
+
+For the purposes of the current ownership analysis:
+
+```text
+Capability = Undetermined
+```
+
+---
+
+## 8.14 Questions Requiring Further Review
+
+The following questions should be resolved:
+
+1. Is Capability an ability, a permission, or both?
+2. Can a Machine possess Capability?
+3. Can a Human possess Capability without Authority?
+4. Can Capability exist without Identity?
+5. Can Capability exist without Authorization?
+6. Is Capability derived from Authority?
+7. Can Capability exist without Authority?
+8. Can Capability change with State?
+9. Can Capability be constrained by Time or Location?
+10. Should physical/technical ability and permission be separate concepts?
+11. Does ADE require a separate concept for Ability?
+12. Would separating Ability and Permission simplify the Core Model?
+
+---
+
+## 8.15 Current Ownership Status
+
+```text
+Capability
+    ↓
+UNDetermined
+    ↓
+Requires distinction between:
+    Ability
+    and
+    Permission
+```
+
+No change to `CORE-MODEL.md` should be made until this distinction has been resolved.
+
+---
+
+## 8.16 Next Review
+
+The next concept requiring analysis is **Authorization**.
+
+Authorization should be evaluated against the findings for:
+
+```text
+Identity
+Authentication
+Authority
+Capability
+Action
+```
+
+The objective is to determine whether Authorization belongs entirely within ADE-IF or whether ADE-Core requires a minimal general semantic concept for authorization decisions.
+
+---
