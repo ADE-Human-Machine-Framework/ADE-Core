@@ -298,3 +298,96 @@ The analysis should answer:
 
 This will establish whether the current ADE-Core Identity definition is appropriately scoped or contains identity-framework-specific material that should be moved to ADE-IF.
 
+---
+
+## 5.12 Minimum Core Definition Test
+
+The minimum ADE-Core definition of Identity should be evaluated against the following test:
+
+> **Can Identity be used as a general semantic concept by ADE frameworks without requiring the specialized identity mechanisms defined by ADE-IF?**
+
+If the answer is yes, Identity has a valid role at the ADE-Core level.
+
+The Core definition should be limited to the minimum meaning required for that role.
+
+### Candidate Core Meaning
+
+The current candidate definition is:
+
+> **Identity provides a persistent reference to a specific Entity within an ADE context.**
+
+This definition establishes the relationship between Identity and Entity without requiring ADE-Core to define:
+
+* Authentication
+* Credentials
+* Verification
+* Authority
+* Capability
+* Authorization
+* Identity Claims
+* Identity Attributes
+* Identity Sources
+* Identity Context
+
+These concepts may be defined by ADE-IF or other applicable frameworks.
+
+### Cross-Framework Test
+
+The candidate Core Identity should be usable by other ADE frameworks, including:
+
+```text
+ADE-HTF
+    │
+    └── Entity
+          └── Identity
+
+ADE-LF
+    │
+    └── Entity
+          └── Identity
+
+ADE-USLF
+    │
+    └── Entity
+          └── Identity
+
+ADE-IF
+    │
+    └── Entity
+          └── Identity
+                ├── Identity Reference
+                ├── Identity Claim
+                ├── Credential
+                ├── Verification
+                ├── Authentication
+                └── Authorization
+```
+
+This would allow Identity to function as a common semantic foundation while allowing ADE-IF to provide specialized identity capabilities.
+
+### Scope Boundary
+
+The presence of Identity in ADE-Core should not imply that ADE-Core owns the complete identity domain.
+
+The distinction is:
+
+```text
+ADE-Core
+    Identity
+    = foundational semantic concept
+
+ADE-IF
+    Identity Framework
+    = specialized identity architecture
+```
+
+This distinction should be preserved throughout the ADE documentation.
+
+### Preliminary Finding
+
+The minimum Core Definition Test currently supports retaining **Identity as a foundational ADE-Core concept**, provided that the Core definition remains limited to its general semantic relationship with Entity.
+
+The specialized identity structures and mechanisms should remain outside the Core unless future architectural analysis determines otherwise.
+
+This remains a preliminary finding until the related concepts of Authentication, Authority, Capability, Authorization, Source, Provenance, and Confidence have been evaluated.
+
