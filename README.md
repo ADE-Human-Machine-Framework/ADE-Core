@@ -62,7 +62,7 @@ Describes how individuals, organizations, developers, researchers, and other par
 
 For readers new to ADE-Core, the recommended sequence is:
 
-**CHARTER → ARCHITECTURE → DESIGN PRINCIPLES → CORE MODEL → TERMINOLOGY → RELATIONSHIPS → CONTRIBUTION**
+**CHARTER → ARCHITECTURE → DESIGN PRINCIPLES → CORE MODEL → TERMINOLOGY → RELATIONSHIPS → CONTRIBUTING**
 
 The README provides an overview and entry point; the documents above contain the substantive foundation of ADE-Core, followed by guidance for participating in its development.
 
