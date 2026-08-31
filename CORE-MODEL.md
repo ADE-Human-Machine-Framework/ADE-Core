@@ -30,7 +30,7 @@ It defines:
 * State and change
 * Identity and entity reference
 * Source and information provenance
-* Authority, capability, and authorization
+* Authority, ability, and authorization
 * Intent
 * Representation of incomplete information
 
@@ -64,7 +64,7 @@ The Core Model should allow this context to be represented without requiring eve
 
 ### 3.5 Separation of Identity, Authentication, Authority, and Authorization
 
-Identity, authentication, authority, capability, and authorization are distinct concepts and should not be conflated.
+Identity, authentication, authority, ability, and authorization are distinct concepts and should not be conflated.
 
 An entity may be identified without being authenticated, authenticated without possessing authority for a particular action, or authorized for one action while not being authorized for another.
 
@@ -148,7 +148,7 @@ An Entity may have:
 * Locations
 * Intent
 * Participation in Events
-* Authority or capabilities where applicable
+* Authority or Ability where applicable
 
 ### Specialized Entities
 
@@ -757,7 +757,7 @@ Authority therefore represents recognized standing, responsibility, or control r
 
 **Ability** represents what an Entity can do, perform, support, or otherwise accomplish within a defined context.
 
-Ability describes capability in the general semantic sense and does not by itself establish that an Entity is permitted to perform an Action.
+Ability describes what an Entity can do in the general semantic sense and does not by itself establish that the Entity is permitted to perform an Action.
 
 Examples include:
 
@@ -808,7 +808,7 @@ Machine
 
 An Entity may therefore have an Ability without having Permission to exercise that Ability in a particular context.
 
-Detailed Permission and identity- or access-related Capability models may be defined by ADE-IF or other specialized ADE frameworks.
+Detailed Permission and identity- or access-related Ability models may be defined by ADE-IF or other specialized ADE frameworks.
 
 ADE-Core uses Ability to describe what an Entity can do without implying that the Entity is authorized or permitted to perform the corresponding Action.
 
